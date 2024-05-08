@@ -1,6 +1,6 @@
 export PYTHONHASHSEED=0
 
-MODEL_NAME="lightgbm"
+MODEL_NAME="catboost"
 SAMPLING_NUMBER=0.05
 
 python src/sampling.py \
