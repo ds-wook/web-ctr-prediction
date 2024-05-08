@@ -4,6 +4,7 @@ import warnings
 from pathlib import Path
 
 import hydra
+import joblib
 from omegaconf import DictConfig
 
 from data import DataStorage
@@ -28,6 +29,7 @@ def _main(cfg: DictConfig):
 
         # save model
         trainer.save_model(Path(cfg.models.path))
+        joblib.dump(data_storage, Path(cfg.data.data) / "data_loader.pkl")
 
 
 if __name__ == "__main__":

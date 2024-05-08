@@ -10,19 +10,11 @@ class FeatureEngineering:
 
     def _add_hash_features(self, df: pd.DataFrame) -> pd.DataFrame:
         # Adding to each value the name of its column and applying a hash function
-        with tqdm(total=len(self.cfg.data.hash_features), desc="Hashing features") as pbar:
-            for col in self.cfg.data.hash_features:
+        with tqdm(total=len(self.cfg.generator.hash_features), desc="Hashing features") as pbar:
+            for col in self.cfg.generator.hash_features:
                 df.loc[:, col] = df.loc[:, col].apply(lambda x: col + str(x))
                 df.loc[:, col] = df.loc[:, col].apply(lambda x: hash(x) % 10**6)
                 pbar.update(1)
-
-        return df
-
-    def _add_time_features(self, df: pd.DataFrame) -> pd.DataFrame:
-        # Adding time features
-        df["date"] = pd.to_datetime(df["date"], format="%y%m%d%H")
-        df["hour_of_day"] = df["date"].dt.hour
-        df["weekday"] = df["date"].dt.dayofweek
 
         return df
 
@@ -66,28 +58,10 @@ class FeatureEngineering:
 
     def generate_features(self, df: pd.DataFrame) -> pd.DataFrame:
 
-        for add_features in [self._add_hash_features, self._add_time_features, self._reduce_mem_usage]:
+        for add_features in [self._add_hash_features, self._reduce_mem_usage]:
             df = add_features(df)
 
-        for col in self.cfg.data.hash_features:
+        for col in self.cfg.generator.hash_features:
             df[col] = df[col].astype("category")
 
         return df
-
-
-def _add_time_features(df, alpha=1.0, features=["ip", "app", "os", "channel"]):
-
-    df["total_time"] = (df["click_time"] - df["click_time"].min()).dt.total_seconds()
-
-    for feature in ["ip", "os", "app", "channel"]:
-        df[feature + "_prev_click"] = df.groupby(feature)["total_time"].shift(1)
-        df[feature + "_next_click"] = df.groupby(feature)["total_time"].shift(-1)
-
-        df[feature + "_click_diff"] = (df[feature + "_next_click"] - df["total_time"]) - (
-            df["total_time"] - df[feature + "_prev_click"]
-        )
-        df[feature + "_click_prop"] = (df[feature + "_next_click"] - df["total_time"]) / (
-            df["total_time"] - df[feature + "_prev_click"] + alpha
-        )
-
-    return df

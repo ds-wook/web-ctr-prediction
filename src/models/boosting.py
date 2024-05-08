@@ -50,8 +50,8 @@ class CatBoostTrainer(BaseModel):
         X_valid: pd.DataFrame | np.ndarray | None = None,
         y_valid: pd.Series | np.ndarray | None = None,
     ) -> CatBoostClassifier:
-        train_set = Pool(X_train, y_train, cat_features=self.cfg.data.cat_features)
-        valid_set = Pool(X_valid, y_valid, cat_features=self.cfg.data.cat_features)
+        train_set = Pool(X_train, y_train, cat_features=self.cfg.generator.cat_features)
+        valid_set = Pool(X_valid, y_valid, cat_features=self.cfg.generator.cat_features)
 
         params = OmegaConf.to_container(self.cfg.models.params)
         model = CatBoostClassifier(random_state=self.cfg.models.seed, **params)
@@ -77,8 +77,8 @@ class LightGBMTrainer(BaseModel):
         X_valid: pd.DataFrame | np.ndarray | None = None,
         y_valid: pd.Series | np.ndarray | None = None,
     ) -> lgb.Booster:
-        train_set = lgb.Dataset(X_train, y_train, categorical_feature=self.cfg.data.cat_features)
-        valid_set = lgb.Dataset(X_valid, y_valid, categorical_feature=self.cfg.data.cat_features)
+        train_set = lgb.Dataset(X_train, y_train, categorical_feature=self.cfg.generator.cat_features)
+        valid_set = lgb.Dataset(X_valid, y_valid, categorical_feature=self.cfg.generator.cat_features)
 
         params = OmegaConf.to_container(self.cfg.models.params)
         params["seed"] = self.cfg.models.seed
@@ -88,7 +88,7 @@ class LightGBMTrainer(BaseModel):
             train_set=train_set,
             valid_sets=[train_set, valid_set],
             num_boost_round=self.cfg.models.num_boost_round,
-            categorical_feature=[*self.cfg.data.cat_features],
+            categorical_feature=[*self.cfg.generator.cat_features],
             callbacks=[
                 lgb.log_evaluation(self.cfg.models.verbose_eval),
                 lgb.early_stopping(self.cfg.models.early_stopping_rounds),

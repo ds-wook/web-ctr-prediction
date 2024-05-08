@@ -1,5 +1,5 @@
-path: input/avazu-ctr-prediction/
-encoder: res/encoder/
+path: input/web-ctr-prediction/
+data: res/data/
 shift: 1
 train: train
 test: test

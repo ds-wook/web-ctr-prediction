@@ -13,17 +13,17 @@ class DataStorage:
         self.cfg = cfg
 
     def load_train_data(self) -> pd.DataFrame:
-        train = pd.read_csv(Path(self.cfg.data.path) / "train_sample.csv")
+        train = pd.read_parquet(Path(self.cfg.data.path) / "train_sample.parquet")
         train = FeatureEngineering(self.cfg).generate_features(train)
-        train_x = train[self.cfg.data.select_features]
+        train_x = train.drop(columns=[*self.cfg.generator.drop_features, self.cfg.data.target])
         train_y = train[self.cfg.data.target]
 
         return train_x, train_y
 
     def load_test_data(self) -> pd.DataFrame:
-        test = pd.read_csv(Path(self.cfg.data.path) / "test.csv")
+        test = pd.read_parquet(Path(self.cfg.data.path) / "test.parquet")
         test = FeatureEngineering(self.cfg).generate_features(test)
-        test_x = test[self.cfg.data.select_features]
+        test_x = test.drop(columns=self.cfg.generator.drop_features)
 
         return test_x
 

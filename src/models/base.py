@@ -7,7 +7,6 @@ from pathlib import Path
 from typing import Any
 
 import joblib
-import lightgbm as lgb
 import numpy as np
 import pandas as pd
 import xgboost as xgb
@@ -40,17 +39,6 @@ class BaseModel(ABC):
         raise NotImplementedError
 
     def save_model(self, save_dir: Path) -> None:
-        for fold, model in self.result.models.items():
-            if isinstance(model, lgb.Booster):
-                print("check")
-                model.save_model(save_dir / f"model_{fold}.txt")
-            elif isinstance(model, xgb.Booster):
-                model.save_model(str(save_dir / f"model_{fold}.json"))
-            elif isinstance(model, CatBoostClassifier):
-                model.save_model(str(save_dir / f"model_{fold}.cbm"))
-            else:
-                raise ValueError(f"Model type {type(model)} is not supported")
-
         joblib.dump(self.result, save_dir / f"{self.cfg.models.results}.pkl")
 
     def fit(

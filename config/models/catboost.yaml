@@ -10,11 +10,11 @@ params:
   gpu_cat_features_storage: CpuPinnedMemory
   gpu_ram_part: 0.9
   max_ctr_complexity: 4
-  learning_rate: 0.5
+  learning_rate: 0.1
   od_type: Iter
   allow_writing_files: False
 
-path: res/models/catboost/
+path: res/models/
 results: 5fold-ctr-catboost
 early_stopping_rounds: 100
 seed: 42
