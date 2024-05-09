@@ -49,13 +49,13 @@ def _main(cfg: DictConfig):
 
     # load dataset
     data_storage = DataStorage(cfg)
-    test_x = data_storage.load_test_data()
+    test_x = data_storage.load_test_dataset()
     submit = pd.read_csv(Path(cfg.data.path) / f"{cfg.data.submit}.csv")
 
     # predict
     preds = inference_models(result, test_x)
     submit[cfg.data.target] = preds
-    submit.to_csv(Path(cfg.output.path) / f"{cfg.models.results}.csv", index=False)
+    submit.to_csv(Path(cfg.output.path) / f"{cfg.output.name}.csv", index=False)
 
 
 if __name__ == "__main__":

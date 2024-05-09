@@ -5,16 +5,16 @@ from pathlib import Path
 import hydra
 from omegaconf import DictConfig
 
-from data import sampling_train
+from data import negative_sampling_train_dataset, sampling_train_dataset
 
 
 @hydra.main(config_path="../config/", config_name="sampling", version_base="1.2.0")
 def _main(cfg: DictConfig):
     # load dataset
-    train = sampling_train(cfg)
+    train = negative_sampling_train_dataset(cfg) if cfg.mode == "negative_sampling" else sampling_train_dataset(cfg)
 
     # save dataset
-    train.to_parquet(Path(cfg.data.path) / "train_sample.parquet")
+    train.to_parquet(Path(cfg.data.path) / f"{cfg.output.name}.parquet")
 
 
 if __name__ == "__main__":

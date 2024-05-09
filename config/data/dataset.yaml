@@ -7,4 +7,4 @@ submit: sample_submission
 target: Click
 n_splits: 5
 seed: 1119
-sampling: 0.01
+sampling: 0.4

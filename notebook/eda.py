@@ -8,7 +8,9 @@ train.head()
 # %%
 train.shape
 # %%
-train.info()
+train = pd.read_parquet("../input/web-ctr-prediction/train_sample_baseline.parquet")
+
+train.head()
 # %%
 train.dtypes[train.dtypes == "object"].index
 # %%

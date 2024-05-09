@@ -16,10 +16,9 @@ def _main(cfg: DictConfig):
     with warnings.catch_warnings():
         warnings.filterwarnings("ignore", category=UserWarning)
 
-        data_storage = DataStorage(cfg)
-
         # load dataset
-        train_x, train_y = data_storage.load_train_data()
+        data_storage = DataStorage(cfg)
+        train_x, train_y = data_storage.load_train_dataset()
 
         # choose trainer
         trainer = bulid_model(cfg)

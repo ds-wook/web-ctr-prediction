@@ -1,14 +1,17 @@
 export PYTHONHASHSEED=0
 
-MODEL_NAME="catboost"
-SAMPLING_NUMBER=0.05
+MODEL_NAME="lightgbm"
+SAMPLING_NUMBER=0.4
+SAMPING="postive_sampling"      
 
 python src/sampling.py \
-    sampling=${SAMPLING_NUMBER}
+    mode=${SAMPING} \
+    data.sampling=${SAMPLING_NUMBER}
 
 python src/train.py \
     models=${MODEL_NAME} \
     models.results=5fold-ctr-${MODEL_NAME}
 
 python src/predict.py \
-    models=${MODEL_NAME}
+    models=${MODEL_NAME} \
+    output.name=5fold-ctr-${MODEL_NAME}-${SAMPLING_NUMBER} \

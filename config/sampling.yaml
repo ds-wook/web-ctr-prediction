@@ -6,9 +6,9 @@ hydra:
 output:
   path: output
   submission: sample_submission.csv
-  name: 5fold-ctr-catboost.csv
+  name: train_sample
 
-sampling: 0.05
+mode: negative_sampling
 
 defaults:
   - _self_
