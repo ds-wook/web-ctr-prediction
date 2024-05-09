@@ -14,6 +14,11 @@ hydra:
 output:
   path: output
   submission: sample_submission
-  name: 5fold-ctr-catboost
+  name: rank-ensemble
 
-seed: 42
+preds:
+- 5fold-ctr-lightgbm-65
+- 5fold-ctr-lightgbm-8
+- 5fold-ctr-lightgbm-hash
+- 5fold-ctr-lightgbm-negative
+- 5fold-ctr-lightgbm

@@ -8,9 +8,11 @@ train.head()
 # %%
 train.shape
 # %%
-train = pd.read_parquet("../input/web-ctr-prediction/train_sample_baseline.parquet")
+train = pd.read_parquet("../input/web-ctr-prediction/train_negative_sample.parquet")
 
 train.head()
+# %%
+train.shape
 # %%
 train.dtypes[train.dtypes == "object"].index
 # %%
@@ -27,4 +29,19 @@ test = pd.read_csv("../input/web-ctr-prediction/test.csv")
 # %%
 test.to_parquet("../input/web-ctr-prediction/test.parquet")
 
+# %%
+train["Click"].value_counts(normalize=True)
+# %%
+import numpy as np
+import pandas as pd
+
+train = pd.read_parquet("../input/web-ctr-prediction/train_sample.parquet")
+
+train["Click"].value_counts(normalize=True)
+# %%
+train.shape
+# %%
+train.head()
+# %%
+train.dtypes[train.dtypes == "object"].index
 # %%
