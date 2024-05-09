@@ -12,16 +12,14 @@ class DataStorage:
     def __init__(self, cfg: DictConfig):
         self.cfg = cfg
 
-    def load_train_dataset(self) -> pd.DataFrame:
-        train = pd.read_parquet(Path(self.cfg.data.path) / "train_sample.parquet")
+    def load_train_dataset(self, train: pd.DataFrame) -> tuple[pd.DataFrame, pd.Series]:
         train = FeatureEngineering(self.cfg).generate_features(train)
         train_x = train.drop(columns=[*self.cfg.generator.drop_features, self.cfg.data.target])
         train_y = train[self.cfg.data.target]
 
         return train_x, train_y
 
-    def load_test_dataset(self) -> pd.DataFrame:
-        test = pd.read_parquet(Path(self.cfg.data.path) / "test.parquet")
+    def load_test_dataset(self, test: pd.DataFrame) -> pd.DataFrame:
         test = FeatureEngineering(self.cfg).generate_features(test)
         test_x = test.drop(columns=self.cfg.generator.drop_features)
 

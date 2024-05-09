@@ -1,7 +1,7 @@
 path: input/web-ctr-prediction/
 data: res/data/
 shift: 1
-train: train
+train: train_sample
 test: test
 submit: sample_submission
 target: Click

@@ -8,38 +8,41 @@ import lightgbm as lgb
 import numpy as np
 import pandas as pd
 import xgboost as xgb
+from catboost import CatBoostClassifier
 from omegaconf import DictConfig
 from tqdm import tqdm
 
 from data import DataStorage
-from models import ModelResult
+from models import BulidModel
 
 
-def inference_models(result: list[ModelResult], test_x: pd.DataFrame) -> np.ndarray:
+def inference_models(models: list[BulidModel], test_x: pd.DataFrame) -> np.ndarray:
     """
     Given a model, predict probabilities for each class.
     Args:
-        model_results: ModelResult object
+        models: Models
         test_x: test dataframe
     Returns:
         predict probabilities for each class
     """
 
-    folds = len(result.models)
-    preds = np.zeros((test_x.shape[0],))
+    folds = len(models)
+    preds = []
 
-    for model in tqdm(result.models.values(), total=folds, desc="Predicting models"):
-        preds += (
-            model.predict(xgb.DMatrix(test_x)) / folds
-            if isinstance(model, xgb.Booster)
-            else (
-                model.predict(test_x) / folds
-                if isinstance(model, lgb.Booster)
-                else model.predict_proba(test_x)[:, 1] / folds
-            )
-        )
+    for model in tqdm(models, total=folds, desc="Predicting models"):
+        if isinstance(model, xgb.Booster):
+            preds.append(model.predict(xgb.DMatrix(test_x)))
 
-    return preds
+        elif isinstance(model, lgb.Booster):
+            preds.append(model.predict(test_x))
+
+        elif isinstance(model, CatBoostClassifier):
+            preds.append(model.predict_proba(test_x)[:, 1])
+
+        else:
+            raise ValueError("Model not supported")
+
+    return np.mean(preds, axis=0)
 
 
 @hydra.main(config_path="../config/", config_name="predict", version_base="1.3.1")
@@ -49,12 +52,12 @@ def _main(cfg: DictConfig):
 
     # load dataset
     data_storage = DataStorage(cfg)
-    test_x = data_storage.load_test_dataset()
-    submit = pd.read_csv(Path(cfg.data.path) / f"{cfg.data.submit}.csv")
+    test = pd.read_parquet(Path(cfg.data.path) / f"{cfg.data.test}.parquet")
+    test_x = data_storage.load_test_dataset(test)
 
     # predict
-    preds = inference_models(result, test_x)
-    submit[cfg.data.target] = preds
+    submit = pd.read_csv(Path(cfg.data.path) / f"{cfg.data.submit}.csv")
+    submit[cfg.data.target] = inference_models(result, test_x)
     submit.to_csv(Path(cfg.output.path) / f"{cfg.output.name}.csv", index=False)
 
 

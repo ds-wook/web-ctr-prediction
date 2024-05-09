@@ -5,6 +5,7 @@ from pathlib import Path
 
 import hydra
 import joblib
+import pandas as pd
 from omegaconf import DictConfig
 
 from data import DataStorage
@@ -18,7 +19,8 @@ def _main(cfg: DictConfig):
 
         # load dataset
         data_storage = DataStorage(cfg)
-        train_x, train_y = data_storage.load_train_dataset()
+        train = pd.read_parquet(Path(cfg.data.path) / f"{cfg.data.train}.parquet")
+        train_x, train_y = data_storage.load_train_dataset(train)
 
         # choose trainer
         trainer = bulid_model(cfg)
