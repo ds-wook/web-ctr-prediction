@@ -1,10 +1,10 @@
 path: input/web-ctr-prediction/
-data: res/data/
+meta: res/meta/
 shift: 1
-train: train_sample
+train: train_sample_3
 test: test
 submit: sample_submission
 target: Click
 n_splits: 5
 seed: 1119
-sampling: 0.4
+sampling: 0.3

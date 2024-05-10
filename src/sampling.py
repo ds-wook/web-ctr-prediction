@@ -14,7 +14,7 @@ def _main(cfg: DictConfig):
     train = negative_sampling_train_dataset(cfg) if cfg.mode == "negative_sampling" else sampling_train_dataset(cfg)
 
     # save dataset
-    train.to_parquet(Path(cfg.data.path) / f"{cfg.output.name}.parquet")
+    train.to_parquet(Path(cfg.data.path) / f"{cfg.data.train}.parquet")
 
 
 if __name__ == "__main__":

@@ -95,4 +95,6 @@ class LightGBMTrainer(BaseModel):
             ],
         )
 
+        del train_set, valid_set
+
         return model

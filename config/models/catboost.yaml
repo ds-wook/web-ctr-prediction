@@ -8,7 +8,7 @@ params:
   simple_ctr: FeatureFreq
   combinations_ctr: FeatureFreq
   gpu_cat_features_storage: CpuPinnedMemory
-  gpu_ram_part: 0.5
+  gpu_ram_part: 0.1
   max_ctr_complexity: 4
   learning_rate: 0.1
   od_type: Iter

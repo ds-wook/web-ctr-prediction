@@ -77,11 +77,12 @@ class BaseModel(ABC):
 
                 models[f"fold_{fold}"] = model
 
-            del X_train, X_valid, y_train, y_valid, model
+            del model, X_train, X_valid, y_train, y_valid
             gc.collect()
 
         print(f"CV Score: {roc_auc_score(y, oof_preds):.6f}")
-
         self.result = ModelResult(oof_preds=oof_preds, models=models)
+        del oof_preds, y, models
+        gc.collect()
 
         return self

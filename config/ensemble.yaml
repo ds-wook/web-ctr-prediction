@@ -21,4 +21,5 @@ preds:
 - 5fold-ctr-lightgbm-8
 - 5fold-ctr-lightgbm-hash
 - 5fold-ctr-lightgbm-negative
-- 5fold-ctr-lightgbm
+- 5fold-ctr-lightgbm-0.35-lr0.25
+- 5fold-ctr-lightgbm-0.35

@@ -1,47 +1,36 @@
 # %%
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+import seaborn as sns
 
-train = pd.read_parquet("../input/web-ctr-prediction/train_sample.parquet")
-
-train.head()
-# %%
-train.shape
-# %%
-train = pd.read_parquet("../input/web-ctr-prediction/train_negative_sample.parquet")
-
-train.head()
-# %%
-train.shape
-# %%
-train.dtypes[train.dtypes == "object"].index
-# %%
-train.loc[:, "F01"] = train.loc[:, "F01"].apply(lambda x: "F01" + str(x))
-train["F01"].head()
-# %%
-train.loc[:, "F01"] = train.loc[:, "F01"].apply(lambda x: hash(x) % 10**6)
-train["F01"].head()
-# %%
-import pandas as pd
-
-test = pd.read_csv("../input/web-ctr-prediction/test.csv")
+train = pd.read_parquet("../input/web-ctr-prediction/train.parquet")
 
 # %%
-test.to_parquet("../input/web-ctr-prediction/test.parquet")
+print(train.shape)
 
 # %%
-train["Click"].value_counts(normalize=True)
-# %%
-import numpy as np
-import pandas as pd
+train["F04"].value_counts(normalize=True)
 
-train = pd.read_parquet("../input/web-ctr-prediction/train_sample.parquet")
+# %%
+num_features = train.select_dtypes("int64").columns.to_list() + train.select_dtypes("float64").columns.to_list()
 
-train["Click"].value_counts(normalize=True)
+for feature in num_features[1:]:
+    sns.histplot(data=train, x=feature)
+    plt.show()
+
 # %%
-train.shape
+sns.heatmap(train[num_features].corr())
+plt.show()
+
 # %%
-train.head()
+from scipy.stats import boxcox
+
+# train 데이터셋에 대해 특성 F01에 Box-Cox 변환 적용
+train["F01_boxcox_transformed"], _ = boxcox(train["F01"])  # 1을 더해주는 이유는 0 값이 존재할 경우에 대비한 것입니다.
+
+
 # %%
-train.dtypes[train.dtypes == "object"].index
+sns.histplot(data=train, x="F06")
+
 # %%

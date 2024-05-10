@@ -25,32 +25,10 @@ cat_features:
 - F35
 - F37
 - F39
-hash_features:
-- F01
-- F02
-- F03
-- F05
-- F07
-- F08
-- F09
-- F10
-- F12
-- F13
-- F15
-- F16
-- F17
-- F20
-- F21
-- F22
-- F23
-- F25
-- F26
-- F28
-- F30
-- F31
-- F34
-- F35
-- F37
-- F39
 drop_features:
 - ID
+- F14
+- F18
+- F27
+- F29
+- F36

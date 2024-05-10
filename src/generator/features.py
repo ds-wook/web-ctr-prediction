@@ -8,24 +8,35 @@ class FeatureEngineering:
     def __init__(self, cfg: DictConfig):
         self.cfg = cfg
 
-    def _add_hash_features(self, df: pd.DataFrame) -> pd.DataFrame:
+    def add_hash_features(self, df: pd.DataFrame) -> pd.DataFrame:
         # Adding to each value the name of its column and applying a hash function
-        with tqdm(total=len(self.cfg.generator.hash_features), desc="Hashing features") as pbar:
-            for col in self.cfg.generator.hash_features:
-                df.loc[:, col] = df.loc[:, col].apply(lambda x: col + str(x))
+        with tqdm(total=len(self.cfg.generator.cat_features), desc="Hashing features") as pbar:
+            for col in self.cfg.generator.cat_features:
+                df[col] = df[col].fillna("NaN")
+                df[col] = df[col].astype(str)
+                df.loc[:, col] = df.loc[:, col].apply(lambda x: col + x)
                 df.loc[:, col] = df.loc[:, col].apply(lambda x: hash(x) % 10**6)
                 pbar.update(1)
 
         return df
 
-    def _convert_categorical_features(self, df: pd.DataFrame) -> pd.DataFrame:
-        # Convert to category type
-        for col in self.cfg.generator.hash_features:
-            df[col] = df[col].astype("category")
+    def convert_categorical_features(self, df: pd.DataFrame) -> pd.DataFrame:
+        with tqdm(total=len(self.cfg.generator.cat_features), desc="Convert features") as pbar:
+            # Convert to category type
+            for col in self.cfg.generator.cat_features:
+                df[col] = df[col].astype("category")
+                pbar.update(1)
 
         return df
 
-    def _reduce_mem_usage(self, df: pd.DataFrame, verbose: bool = True) -> pd.DataFrame:
+    def combine_features(self, df: pd.DataFrame) -> pd.DataFrame:
+        df["F14_18"] = df["F14"] * df["F18"]
+        df["F18_36"] = df["F18"] * df["F36"]
+        df["F27_29"] = df["F27"] * df["F29"]
+
+        return df
+
+    def reduce_mem_usage(self, df: pd.DataFrame, verbose: bool = True) -> pd.DataFrame:
         """
         Iterate through all the columns of a dataframe and modify the data type to reduce memory usage.
         """
@@ -67,17 +78,5 @@ class FeatureEngineering:
                 f"Mem. usage decreased to {end_mem:5.2f} Mb "
                 + f"({100 * (start_mem - end_mem) / start_mem:.1f}% reduction)"
             )
-
-        return df
-
-    def generate_features(self, df: pd.DataFrame) -> pd.DataFrame:
-        methods = (
-            [self._add_hash_features, self._convert_categorical_features, self._reduce_mem_usage]
-            if self.cfg.models.name == "catboost"
-            else [self._convert_categorical_features, self._reduce_mem_usage]
-        )
-
-        for add_features in methods:
-            df = add_features(df)
 
         return df
