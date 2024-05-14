@@ -1,7 +1,7 @@
 path: input/web-ctr-prediction/
 meta: res/meta/
 shift: 1
-train: train_sample_3
+train: train_sample
 test: test
 submit: sample_submission
 target: Click

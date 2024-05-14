@@ -14,6 +14,6 @@ hydra:
 output:
   path: output
   submission: sample_submission
-  name: 5fold-ctr-catboost
+  name: 5fold-ctr-lightgbm-0.4-seed1119
 
 seed: 42

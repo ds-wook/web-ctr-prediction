@@ -14,7 +14,7 @@ class FeatureEngineering:
             for col in self.cfg.generator.cat_features:
                 df[col] = df[col].fillna("NaN")
                 df[col] = df[col].astype(str)
-                df.loc[:, col] = df.loc[:, col].apply(lambda x: col + x)
+                # df.loc[:, col] = df.loc[:, col].apply(lambda x: col + x)
                 df.loc[:, col] = df.loc[:, col].apply(lambda x: hash(x) % 10**6)
                 pbar.update(1)
 

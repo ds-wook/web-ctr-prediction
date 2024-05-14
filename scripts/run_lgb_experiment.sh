@@ -1,20 +1,20 @@
 export PYTHONHASHSEED=0
 
 MODEL_NAME="lightgbm"
-SAMPLING_NUMBER=0.35
-SAMPING="postive_sampling"
-SEED=1119
+SAMPLING=0.35
+SEED=42
 
 python src/sampling.py \
-    mode=${SAMPING} \
-    data.sampling=${SAMPLING_NUMBER} \
-    data.seed=${SEED}
+    data.seed=${SEED} \
+    data.sampling=${SAMPLING} \
+    data.train=train_sample_${SAMPLING}_seed${SEED} \
 
 python src/train.py \
+    data.train=train_sample_${SAMPLING}_seed${SEED} \
     models=${MODEL_NAME} \
-    models.results=5fold-ctr-${MODEL_NAME}-${SAMPLING_NUMBER}-seed${SEED}
+    models.results=5fold-ctr-${MODEL_NAME}-${SAMPLING}-seed${SEED}
 
 python src/predict.py \
     models=${MODEL_NAME} \
-    models.results=5fold-ctr-${MODEL_NAME}-${SAMPLING_NUMBER}-seed${SEED} \
-    output.name=5fold-ctr-${MODEL_NAME}-${SAMPLING_NUMBER}-seed${SEED}
+    models.results=5fold-ctr-${MODEL_NAME}-${SAMPLING}-seed${SEED} \
+    output.name=5fold-ctr-${MODEL_NAME}-${SAMPLING}-seed${SEED}

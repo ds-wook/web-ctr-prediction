@@ -80,8 +80,10 @@ class BaseModel(ABC):
             del model, X_train, X_valid, y_train, y_valid
             gc.collect()
 
-        print(f"CV Score: {roc_auc_score(y, oof_preds):.6f}")
         self.result = ModelResult(oof_preds=oof_preds, models=models)
+
+        print(f"CV Score: {roc_auc_score(y, oof_preds):.6f}")
+
         del oof_preds, y, models
         gc.collect()
 

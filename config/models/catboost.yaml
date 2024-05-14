@@ -2,15 +2,13 @@ name: catboost
 
 params:
   iterations: 10000
-  task_type: GPU
+  task_type: CPU
   loss_function: Logloss
   eval_metric: AUC
-  simple_ctr: FeatureFreq
-  combinations_ctr: FeatureFreq
-  gpu_cat_features_storage: CpuPinnedMemory
-  gpu_ram_part: 0.1
+  simple_ctr: Counter
+  combinations_ctr: Counter
   max_ctr_complexity: 4
-  learning_rate: 0.1
+  learning_rate: 0.3
   od_type: Iter
   allow_writing_files: False
 

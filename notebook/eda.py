@@ -4,21 +4,19 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 
-train = pd.read_parquet("../input/web-ctr-prediction/train.parquet")
+train = pd.read_parquet("../input/web-ctr-prediction/train_sample_baseline.parquet")
 
 # %%
 print(train.shape)
 
 # %%
-train["F04"].value_counts(normalize=True)
+train["Click"].value_counts(normalize=True)
 
 # %%
 num_features = train.select_dtypes("int64").columns.to_list() + train.select_dtypes("float64").columns.to_list()
-
-for feature in num_features[1:]:
-    sns.histplot(data=train, x=feature)
-    plt.show()
-
+print(num_features)
+# %%
+train[train[num_features] < 0].sum()
 # %%
 sns.heatmap(train[num_features].corr())
 plt.show()

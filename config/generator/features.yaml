@@ -25,10 +25,20 @@ cat_features:
 - F35
 - F37
 - F39
-drop_features:
-- ID
+
+num_features:
 - F14
+- F04
+- F11
 - F18
+- F19
+- F24
 - F27
 - F29
+- F32
+- F33
 - F36
+- F38
+
+drop_features:
+- ID

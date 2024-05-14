@@ -4,9 +4,9 @@ params:
   boosting_type: gbdt
   objective: binary
   metric: auc
-  learning_rate: 0.07
+  learning_rate: 0.05
   bagging_seed: 11
-  num_leaves: 491
+  num_leaves: 256
   max_depth: -1
   min_child_weight: 0.03454472573214212
   bagging_fraction: 0.4181193142567742
@@ -17,7 +17,7 @@ params:
   n_jobs: -1
 
 path: res/models/
-results: 5fold-ctr-lightgbm
+results: 5fold-ctr-lightgbm-0.4-seed1119
 early_stopping_rounds: 100
 num_boost_round: 10000
 verbose_eval: 100

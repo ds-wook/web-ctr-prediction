@@ -18,6 +18,8 @@ def _main(cfg: DictConfig):
         # load dataset
         data_storage = DataStorage(cfg)
         train_x, train_y = data_storage.load_train_dataset()
+        print(f"train's shape: {train_x.shape}")
+        print(train_y.value_counts(normalize=True))
 
         # choose trainer
         trainer = bulid_model(cfg)

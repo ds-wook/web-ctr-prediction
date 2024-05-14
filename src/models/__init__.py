@@ -3,6 +3,7 @@ from omegaconf import DictConfig
 from .base import *
 from .boosting import *
 from .boosting import CatBoostTrainer, LightGBMTrainer, XGBoostTrainer
+from .dlrm import DLRM
 
 BulidModel = CatBoostTrainer | LightGBMTrainer | XGBoostTrainer
 

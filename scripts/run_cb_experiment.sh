@@ -1,20 +1,20 @@
 export PYTHONHASHSEED=0
 
 MODEL_NAME="catboost"
-SAMPLING_NUMBER=0.35
-SAMPING="negative_sampling"
-TRAIN="train_sample_65"
+SAMPLING=0.4
+SEED=1119
 
 python src/sampling.py \
-    mode=${SAMPING} \
-    data.sampling=${SAMPLING_NUMBER}
+    data.seed=${SEED} \
+    data.sampling=${SAMPLING} \
+    data.train=train_sample_${SAMPLING}_seed${SEED} \
 
 python src/train.py \
-    data.train=${TRAIN} \
+    data.train=train_sample_${SAMPLING}_seed${SEED} \
     models=${MODEL_NAME} \
-    models.results=5fold-ctr-${MODEL_NAME}-${SAMPLING_NUMBER}
+    models.results=5fold-ctr-${MODEL_NAME}-${SAMPLING}-seed${SEED}
 
 python src/predict.py \
     models=${MODEL_NAME} \
-    models.results=5fold-ctr-${MODEL_NAME}-${SAMPLING_NUMBER} \
-    output.name=5fold-ctr-${MODEL_NAME}-${SAMPLING_NUMBER}
+    models.results=5fold-ctr-${MODEL_NAME}-${SAMPLING}-seed${SEED} \
+    output.name=5fold-ctr-${MODEL_NAME}-${SAMPLING}-seed${SEED}
