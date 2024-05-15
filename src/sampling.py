@@ -36,6 +36,7 @@ def negative_sampling_train_dataset(cfg: DictConfig) -> pd.DataFrame:
 def _main(cfg: DictConfig):
     # load dataset
     train = negative_sampling_train_dataset(cfg)
+
     # save dataset
     train.to_parquet(Path(cfg.data.path) / f"{cfg.data.train}.parquet")
 

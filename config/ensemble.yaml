@@ -24,3 +24,4 @@ preds:
 - 5fold-ctr-lightgbm-0.42-seed42
 - 5fold-ctr-lightgbm-0.42-seed414
 - 5fold-ctr-deepfm-0.4-seed414
+- 5fold-ctr-wdl-0.4-seed414
