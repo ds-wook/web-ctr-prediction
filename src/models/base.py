@@ -60,7 +60,7 @@ class BaseModel(ABC):
         elif isinstance(model, CatBoostClassifier):
             return model.predict_proba(X)[:, 1]
 
-        elif isinstance(model, (DeepFM, WDL)):
+        elif isinstance(model, DeepFM | WDL):
             feature_names = [*self.cfg.generator.sparse_features, *self.cfg.generator.dense_features]
             valid_model_input = {name: X[name] for name in feature_names}
 
