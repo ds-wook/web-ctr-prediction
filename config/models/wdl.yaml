@@ -1,4 +1,4 @@
-name: deepfm
+name: wdl
 
 device: cuda
 seed: 42
@@ -11,8 +11,8 @@ verbose: 1
 patience: 2
 mode: min
 batch_size: 4096
-epochs: 2
+epochs: 4
 
 path: res/models/
 preds: 5fold-ctr-lightgbm-0.4-seed414
-results: 5fold-ctr-deepfm-0.4-seed414
+results: 5fold-ctr-wdl-0.4-seed42

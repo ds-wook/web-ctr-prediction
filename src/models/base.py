@@ -11,7 +11,7 @@ import numpy as np
 import pandas as pd
 import xgboost as xgb
 from catboost import CatBoostClassifier
-from deepctr_torch.models import DeepFM
+from deepctr_torch.models import WDL, DeepFM
 from omegaconf import DictConfig
 from sklearn.metrics import roc_auc_score
 from sklearn.model_selection import StratifiedKFold
@@ -60,7 +60,7 @@ class BaseModel(ABC):
         elif isinstance(model, CatBoostClassifier):
             return model.predict_proba(X)[:, 1]
 
-        elif isinstance(model, DeepFM):
+        elif isinstance(model, (DeepFM, WDL)):
             feature_names = [*self.cfg.generator.sparse_features, *self.cfg.generator.dense_features]
             valid_model_input = {name: X[name] for name in feature_names}
 

@@ -4,7 +4,7 @@ import joblib
 import pandas as pd
 import torch
 from omegaconf import DictConfig
-from sklearn.preprocessing import MinMaxScaler
+from sklearn.preprocessing import QuantileTransformer
 
 from generator import FeatureEngineering, LabelEncoder
 
@@ -50,9 +50,9 @@ class DataStorage:
         Returns:
             dataframe
         """
-        scaler = MinMaxScaler()
+        scaler = QuantileTransformer(n_quantiles=100, output_distribution="normal")
         train[[*self.cfg.generator.num_features]] = scaler.fit_transform(train[[*self.cfg.generator.num_features]])
-        joblib.dump(scaler, Path(self.cfg.data.meta) / "minmax_scaler.pkl")
+        joblib.dump(scaler, Path(self.cfg.data.meta) / "rankgauss.pkl")
 
         return train
 
@@ -64,7 +64,7 @@ class DataStorage:
         Returns:
             dataframe
         """
-        scaler = joblib.load(Path(self.cfg.data.meta) / "minmax_scaler.pkl")
+        scaler = joblib.load(Path(self.cfg.data.meta) / "rankgauss.pkl")
         test[[*self.cfg.generator.num_features]] = scaler.transform(test[[*self.cfg.generator.num_features]])
 
         return test
@@ -74,9 +74,7 @@ class DataStorage:
 
         feature_engineering = FeatureEngineering(self.cfg)
 
-        if self.cfg.models.name == "deepfm":
-            oof_preds = joblib.load(Path(self.cfg.models.path) / f"{self.cfg.models.preds}.pkl").oof_preds
-            train["preds"] = oof_preds
+        if self.cfg.models.name in ["deepfm", "wdl"]:
             train = self._categorize_train_features(train)
             train = self._numerical_train_scaling(train)
             train = train.fillna(0)
@@ -84,7 +82,6 @@ class DataStorage:
         else:
             train = feature_engineering.add_hash_features(train)
             train = feature_engineering.convert_categorical_features(train)
-            # train = feature_engineering.add_time_features(train)
             train = feature_engineering.combine_features(train)
 
         train = feature_engineering.reduce_mem_usage(train)
@@ -99,9 +96,7 @@ class DataStorage:
 
         feature_engineering = FeatureEngineering(self.cfg)
 
-        if self.cfg.models.name == "deepfm":
-            test_preds = pd.read_csv(Path(self.cfg.output.path) / f"{self.cfg.models.preds}.csv")["Click"].to_numpy()
-            test["preds"] = test_preds
+        if self.cfg.models.name in ["deepfm", "wdl"]:
             test = self._categorize_test_features(test)
             test = self._numerical_test_scaling(test)
             test = test.fillna(0)
@@ -109,7 +104,6 @@ class DataStorage:
         else:
             test = feature_engineering.add_hash_features(test)
             test = feature_engineering.convert_categorical_features(test)
-            # test = feature_engineering.add_time_features(test)
             test = feature_engineering.combine_features(test)
 
         test = feature_engineering.reduce_mem_usage(test)
