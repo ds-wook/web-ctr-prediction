@@ -11,7 +11,7 @@ verbose: 1
 patience: 2
 mode: min
 batch_size: 4096
-epochs: 2
+epochs: 100
 
 path: res/models/
 preds: 5fold-ctr-lightgbm-0.4-seed414

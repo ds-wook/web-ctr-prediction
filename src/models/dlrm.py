@@ -1,6 +1,5 @@
 import numpy as np
 import pandas as pd
-import torch
 from deepctr_torch.callbacks import EarlyStopping
 from deepctr_torch.inputs import DenseFeat, SparseFeat, get_feature_names
 from deepctr_torch.models import DeepFM
@@ -35,7 +34,7 @@ class DeepFMTrainer(BaseModel):
         model = DeepFM(
             dnn_feature_columns=feature_columns,
             linear_feature_columns=feature_columns,
-            device=torch.device(self.cfg.models.device),
+            device=self.cfg.models.device,
             seed=self.cfg.models.seed,
             l2_reg_linear=self.cfg.models.l2_reg_linear,
             l2_reg_embedding=self.cfg.models.l2_reg_embedding,
