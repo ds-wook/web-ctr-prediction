@@ -3,9 +3,9 @@ from omegaconf import DictConfig
 from .base import *
 from .boosting import *
 from .boosting import CatBoostTrainer, LightGBMTrainer, XGBoostTrainer
-from .dlrm import DLRM
+from .dlrm import DeepFMTrainer
 
-BulidModel = CatBoostTrainer | LightGBMTrainer | XGBoostTrainer
+BulidModel = CatBoostTrainer | LightGBMTrainer | XGBoostTrainer | DeepFMTrainer
 
 
 def bulid_model(cfg: DictConfig) -> BulidModel:
@@ -13,6 +13,7 @@ def bulid_model(cfg: DictConfig) -> BulidModel:
         "lightgbm": LightGBMTrainer(cfg),
         "xgboost": XGBoostTrainer(cfg),
         "catboost": CatBoostTrainer(cfg),
+        "deepfm": DeepFMTrainer(cfg),
     }
 
     if trainer := model_type.get(cfg.models.name):

@@ -3,18 +3,17 @@ from pathlib import Path
 import joblib
 import pandas as pd
 import torch
-from category_encoders import HashingEncoder
 from omegaconf import DictConfig
 from sklearn.preprocessing import MinMaxScaler
 
-from generator import FeatureEngineering
+from generator import FeatureEngineering, LabelEncoder
 
 
 class DataStorage:
     def __init__(self, cfg: DictConfig):
         self.cfg = cfg
 
-    def _categorize_train_features(self, train_x: pd.DataFrame, train_y: pd.DataFrame) -> pd.DataFrame:
+    def _categorize_train_features(self, train_x: pd.DataFrame) -> pd.DataFrame:
         """Categorical encoding for train data
         Args:
             config: config
@@ -22,10 +21,9 @@ class DataStorage:
         Returns:
             dataframe
         """
-        hashing_enc = HashingEncoder(cols=[*self.cfg.generator.cat_features], n_components=100).fit(train_x, train_y)
-        X_train_hashing = hashing_enc.transform(train_x)
-        joblib.dump(hashing_enc, Path(self.cfg.data.meta) / "hash_encoder.pkl")
-        train_x = train_x[[*self.cfg.generator.num_features]].join(X_train_hashing)
+        le = LabelEncoder()
+        train_x[[*self.cfg.generator.cat_features]] = le.fit_transform(train_x[[*self.cfg.generator.cat_features]])
+        joblib.dump(le, Path(self.cfg.data.meta) / "label_encoder.pkl")
 
         return train_x
 
@@ -38,9 +36,8 @@ class DataStorage:
             dataframe
         """
 
-        hashing_enc = joblib.load(Path(self.cfg.data.meta) / "hash_encoder.pkl")
-        test_hashing = hashing_enc.transform(test_x)
-        test_x = test_x[[*self.cfg.generator.num_features]].join(test_hashing)
+        le = joblib.load(Path(self.cfg.data.meta) / "label_encoder.pkl")
+        test_x[[*self.cfg.generator.cat_features]] = le.transform(test_x[[*self.cfg.generator.cat_features]])
 
         return test_x
 
@@ -54,7 +51,7 @@ class DataStorage:
             dataframe
         """
         scaler = MinMaxScaler()
-        train[self.cfg.generator.num_features] = scaler.fit_transform(train[self.cfg.generator.num_features])
+        train[[*self.cfg.generator.num_features]] = scaler.fit_transform(train[[*self.cfg.generator.num_features]])
         joblib.dump(scaler, Path(self.cfg.data.meta) / "minmax_scaler.pkl")
 
         return train
@@ -68,7 +65,7 @@ class DataStorage:
             dataframe
         """
         scaler = joblib.load(Path(self.cfg.data.meta) / "minmax_scaler.pkl")
-        test[self.cfg.generator.num_features] = scaler.transform(test[self.cfg.generator.num_features])
+        test[[*self.cfg.generator.num_features]] = scaler.transform(test[[*self.cfg.generator.num_features]])
 
         return test
 
@@ -76,9 +73,20 @@ class DataStorage:
         train = pd.read_parquet(Path(self.cfg.data.path) / f"{self.cfg.data.train}.parquet")
 
         feature_engineering = FeatureEngineering(self.cfg)
-        train = feature_engineering.add_hash_features(train)
-        train = feature_engineering.convert_categorical_features(train)
-        train = feature_engineering.combine_features(train)
+
+        if self.cfg.models.name == "deepfm":
+            oof_preds = joblib.load(Path(self.cfg.models.path) / f"{self.cfg.models.preds}.pkl").oof_preds
+            train["preds"] = oof_preds
+            train = self._categorize_train_features(train)
+            train = self._numerical_train_scaling(train)
+            train = train.fillna(0)
+
+        else:
+            train = feature_engineering.add_hash_features(train)
+            train = feature_engineering.convert_categorical_features(train)
+            # train = feature_engineering.add_time_features(train)
+            train = feature_engineering.combine_features(train)
+
         train = feature_engineering.reduce_mem_usage(train)
 
         train_x = train.drop(columns=[*self.cfg.generator.drop_features, self.cfg.data.target])
@@ -90,9 +98,20 @@ class DataStorage:
         test = pd.read_parquet(Path(self.cfg.data.path) / "test.parquet")
 
         feature_engineering = FeatureEngineering(self.cfg)
-        test = feature_engineering.add_hash_features(test)
-        test = feature_engineering.convert_categorical_features(test)
-        test = feature_engineering.combine_features(test)
+
+        if self.cfg.models.name == "deepfm":
+            test_preds = pd.read_csv(Path(self.cfg.output.path) / f"{self.cfg.models.preds}.csv")["Click"].to_numpy()
+            test["preds"] = test_preds
+            test = self._categorize_test_features(test)
+            test = self._numerical_test_scaling(test)
+            test = test.fillna(0)
+
+        else:
+            test = feature_engineering.add_hash_features(test)
+            test = feature_engineering.convert_categorical_features(test)
+            # test = feature_engineering.add_time_features(test)
+            test = feature_engineering.combine_features(test)
+
         test = feature_engineering.reduce_mem_usage(test)
 
         test_x = test.drop(columns=self.cfg.generator.drop_features)

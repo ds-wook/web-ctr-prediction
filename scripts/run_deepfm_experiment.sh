@@ -1,13 +1,8 @@
 export PYTHONHASHSEED=0
 
-MODEL_NAME="lightgbm"
+MODEL_NAME="deepfm"
 SAMPLING=0.4
 SEED=414
-
-python src/sampling.py \
-    data.seed=${SEED} \
-    data.sampling=${SAMPLING} \
-    data.train=train_sample_${SAMPLING}_seed${SEED} \
 
 python src/train.py \
     data.train=train_sample_${SAMPLING}_seed${SEED} \

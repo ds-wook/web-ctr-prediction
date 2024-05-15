@@ -42,3 +42,46 @@ num_features:
 
 drop_features:
 - ID
+
+sparse_features:
+- F01
+- F02
+- F03
+- F05
+- F07
+- F08
+- F09
+- F10
+- F12
+- F13
+- F15
+- F16
+- F17
+- F20
+- F21
+- F22
+- F23
+- F25
+- F26
+- F28
+- F30
+- F31
+- F34
+- F35
+- F37
+- F39
+
+dense_features:
+- F14
+- F04
+- F11
+- F18
+- F19
+- F24
+- F27
+- F29
+- F32
+- F33
+- F36
+- F38
+- preds

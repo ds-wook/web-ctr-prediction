@@ -11,6 +11,7 @@ import numpy as np
 import pandas as pd
 import xgboost as xgb
 from catboost import CatBoostClassifier
+from deepctr_torch.models import DeepFM
 from omegaconf import DictConfig
 from sklearn.metrics import roc_auc_score
 from sklearn.model_selection import StratifiedKFold
@@ -58,6 +59,9 @@ class BaseModel(ABC):
 
         elif isinstance(model, CatBoostClassifier):
             return model.predict_proba(X)[:, 1]
+
+        elif isinstance(model, DeepFM):
+            return model.predict(X, batch_size=64).flatten()
 
         else:
             return model.predict(X)

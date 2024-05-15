@@ -17,10 +17,11 @@ output:
   name: rank-ensemble
 
 preds:
+- 5fold-ctr-lightgbm-0.25-seed42
 - 5fold-ctr-lightgbm-0.3-seed42
 - 5fold-ctr-lightgbm-0.4-seed42
 - 5fold-ctr-lightgbm-0.4-seed414
 - 5fold-ctr-lightgbm-0.4-seed602
-- 5fold-ctr-lightgbm-0.4-seed1119
 - 5fold-ctr-lightgbm-0.42-seed42
 - 5fold-ctr-lightgbm-0.42-seed414
+- 5fold-ctr-deepfm

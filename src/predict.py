@@ -8,6 +8,7 @@ import lightgbm as lgb
 import numpy as np
 import pandas as pd
 import xgboost as xgb
+from deepctr_torch.models import DeepFM
 from omegaconf import DictConfig
 from tqdm import tqdm
 
@@ -15,7 +16,7 @@ from data import DataStorage
 from models import ModelResult
 
 
-def inference_models(results: ModelResult, test_x: pd.DataFrame) -> np.ndarray:
+def inference_models(results: ModelResult, test_x: pd.DataFrame | dict[str, pd.Series]) -> np.ndarray:
     """Given a model, predict probabilities for each class.
     Args:
         results: ModelResult object
@@ -34,6 +35,9 @@ def inference_models(results: ModelResult, test_x: pd.DataFrame) -> np.ndarray:
         elif isinstance(model, xgb.Booster):
             preds += model.predict(xgb.DMatrix(test_x)) / folds
 
+        elif isinstance(model, DeepFM):
+            preds += model.predict(test_x, 64).flatten() / folds
+
         else:
             preds += model.predict_proba(test_x)[:, 1] / folds
 
@@ -48,6 +52,8 @@ def _main(cfg: DictConfig):
     # load test dataset
     data_storage = DataStorage(cfg)
     test_x = data_storage.load_test_dataset()
+
+    test_x = {name: test_x[name] for name in test_x.columns} if cfg.models.name == "deepfm" else test_x
 
     # load submit dataset
     submit = pd.read_csv(Path(cfg.data.path) / f"{cfg.data.submit}.csv")

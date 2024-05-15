@@ -2,9 +2,9 @@ name: lightgbm
 
 params:
   boosting_type: gbdt
-  objective: binary
+  objective: xentropy
   metric: auc
-  learning_rate: 0.05
+  learning_rate: 0.1
   bagging_seed: 11
   num_leaves: 256
   max_depth: -1
