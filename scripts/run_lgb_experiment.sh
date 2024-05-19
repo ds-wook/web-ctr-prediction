@@ -1,8 +1,8 @@
 export PYTHONHASHSEED=0
 
 MODEL_NAME="lightgbm"
-SAMPLING=0.4
-SEED=414
+SAMPLING=0.45
+SEED=517
 
 python src/sampling.py \
     data.seed=${SEED} \
