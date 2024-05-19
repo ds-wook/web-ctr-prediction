@@ -11,7 +11,7 @@ from tqdm import tqdm
 
 
 def negative_sampling_train_dataset(cfg: DictConfig) -> pd.DataFrame:
-    pfile = pq.ParquetFile(Path(cfg.data.path) / "train.parquet")
+    pfile = pq.ParquetFile(Path(cfg.data.path) / "train_add_day.parquet")
 
     train = pd.DataFrame()
     negative = pd.DataFrame()

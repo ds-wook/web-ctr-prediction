@@ -26,7 +26,7 @@ def _main(cfg: DictConfig):
         trainer = bulid_model(cfg)
 
         # train model
-        trainer.run_cv_training(train_x, train_y)
+        trainer.trainer.run_cv_training(train_x, train_y)
 
         # save model
         trainer.save_model(Path(cfg.models.path))
