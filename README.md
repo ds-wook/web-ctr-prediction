@@ -9,14 +9,13 @@
 - GPU: NVIDIA GeForce RTX 3090 Ti
 
 ## Cross Validation
-+ Stratified Group KFold
++ Stratified KFold
 
 ## Ensemble Strategy
 + Rank Ensemble
 
 ## Model Process
-+ Boosting is All you need
-+ CTR Model
+[TBD]
 
 
 ## Requirements
@@ -72,19 +71,18 @@ Running the learning code shell.
 ## Benchmark
 ||cv|public-lb|private-lb|
 |-----|--|---------|----------|
-|5fold-lightgbm-0.35|0.7825|-|-|
-|5fold-catboost-0.35|-|-|-|
+|5fold-lightgbm-0.45|0.7825|-|-|
+|5fold-catboost-0.45|-|-|-|
 
 
 ## Submit
 
 ## Doesn't Work
-+ meta feature: mean features
-+ forcasting model: NBeat is not performance
++ Day Cross validation
++ Catboost GPU
+
 
 
 ## Reference
 
-- [Model](https://www.sciencedirect.com/science/article/pii/S0169207021001874)
-- [Loss](https://www.sciencedirect.com/science/article/pii/S0169207021001679)
 - [Ensemble](https://www.kaggle.com/competitions/ventilator-pressure-prediction/discussion/276138)
