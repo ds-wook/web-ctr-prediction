@@ -8,11 +8,6 @@
 - RAM: 32GB
 - GPU: NVIDIA GeForce RTX 3090 Ti
 
-## Cross Validation
-+ Stratified KFold
-
-## Ensemble Strategy
-+ Rank Ensemble
 
 ## Model Process
 [TBD]
@@ -71,14 +66,14 @@ Running the learning code shell.
 ## Benchmark
 ||cv|public-lb|private-lb|
 |-----|--|---------|----------|
-|5fold-lightgbm-0.45|0.7825|-|-|
-|5fold-catboost-0.45|-|-|-|
+|5fold-lightgbm-0.45|0.7832|-|-|
+|5fold-wide&deep-0.45|0.78|-|-|
+|5fold-wide&deep-0.45|0.78|-|-|
 
-
-## Submit
 
 ## Doesn't Work
 + Day Cross validation
++ Day feature
 + Catboost GPU
 
 

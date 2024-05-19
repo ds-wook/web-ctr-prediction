@@ -20,9 +20,8 @@ def _main(cfg: DictConfig):
         for pred in cfg.preds
     ]
 
-    # Calculate average predictions with equal weights
-    weights = [1 / len(preds)] * len(preds)
-    submit[cfg.data.target] = np.average(preds, weights=weights, axis=0)
+    # Calculate average predictions
+    submit[cfg.data.target] = np.average(preds, axis=0)
 
     # Save the ensembled submission
     submit.to_csv(Path(cfg.output.path) / f"{cfg.output.name}.csv", index=False)
