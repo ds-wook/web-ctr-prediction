@@ -50,8 +50,8 @@ class CatBoostTrainer(BaseModel):
         X_valid: pd.DataFrame | np.ndarray | None = None,
         y_valid: pd.Series | np.ndarray | None = None,
     ) -> CatBoostClassifier:
-        train_set = Pool(X_train, y_train, cat_features=self.cfg.generator.cat_features)
-        valid_set = Pool(X_valid, y_valid, cat_features=self.cfg.generator.cat_features)
+        train_set = Pool(X_train, y_train)
+        valid_set = Pool(X_valid, y_valid)
 
         params = OmegaConf.to_container(self.cfg.models.params)
         model = CatBoostClassifier(random_state=self.cfg.models.seed, **params)

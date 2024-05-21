@@ -74,15 +74,15 @@ class DataStorage:
 
         feature_engineering = FeatureEngineering(self.cfg)
 
-        if self.cfg.models.name in ["deepfm", "wdl"]:
-            train = self._categorize_train_features(train)
-            train = self._numerical_train_scaling(train)
-            train = train.fillna(0)
-
-        else:
+        if self.cfg.models.name == "lightgbm":
             train = feature_engineering.add_hash_features(train)
             train = feature_engineering.convert_categorical_features(train)
             train = feature_engineering.combine_features(train)
+
+        else:
+            train = self._categorize_train_features(train)
+            train = self._numerical_train_scaling(train)
+            train = train.fillna(0)
 
         train = feature_engineering.reduce_mem_usage(train)
 
@@ -96,15 +96,15 @@ class DataStorage:
 
         feature_engineering = FeatureEngineering(self.cfg)
 
-        if self.cfg.models.name in ["deepfm", "wdl"]:
-            test = self._categorize_test_features(test)
-            test = self._numerical_test_scaling(test)
-            test = test.fillna(0)
-
-        else:
+        if self.cfg.models.name == "lightgbm":
             test = feature_engineering.add_hash_features(test)
             test = feature_engineering.convert_categorical_features(test)
             test = feature_engineering.combine_features(test)
+
+        else:
+            test = self._categorize_test_features(test)
+            test = self._numerical_test_scaling(test)
+            test = test.fillna(0)
 
         test = feature_engineering.reduce_mem_usage(test)
 
