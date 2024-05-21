@@ -1,5 +1,7 @@
 import numpy as np
 import pandas as pd
+import torch
+import torch.nn as nn
 from deepctr_torch.callbacks import EarlyStopping
 from deepctr_torch.inputs import DenseFeat, SparseFeat, get_feature_names
 from deepctr_torch.models import WDL, DeepFM
@@ -129,3 +131,25 @@ class WDLTrainer(BaseModel):
         )
 
         return model
+
+
+class FeatureInteraction(nn.Module):
+    def __init__(self, self_interaction: bool):
+        super().__init()
+        self.self_interaction = self_interaction
+
+    def forward(self, inputs: torch.Tensor):
+        feature_dim = inputs.shape[1]
+
+        concat_features = inputs.view(-1, feature_dim, 1)
+        dot_products = torch.matmul(concat_features, concat_features.transpose(1, 2))
+        ones = torch.ones_like(dot_products)
+
+        mask = torch.triu(ones)
+        out_dim = feature_dim * (feature_dim + 1) // 2
+
+        flat_result = dot_products[mask.bool()]
+        reshape_result = flat_result.view(-1, out_dim)
+
+        return reshape_result
+
