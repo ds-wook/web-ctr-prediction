@@ -63,7 +63,7 @@ Running the learning code shell.
 ## Benchmark
 ||cv|public-lb|private-lb|
 |-----|--|---------|----------|
-|5fold-lightgbm-0.45|0.7833|0.7848|-|
+|5fold-lightgbm-0.45|0.7833|-|-|
 |5fold-catboost-0.45|0.7755|-|-|
 |5fold-wide&deep-0.45|0.7812|0.7840|-|
 |5fold-deepFM-0.45|0.7791|0.7848|-|
@@ -118,5 +118,10 @@ Running the learning code shell.
 
 
 ## Reference
-- []
-- [Ensemble](https://www.kaggle.com/competitions/ventilator-pressure-prediction/discussion/276138)
+[1] [LightGBM: A Highly Efficient Gradient Boosting Decision Tree](https://lightgbm.readthedocs.io/en/stable/)
+[2] [Wide & Deep Learning for Recommender Systems](https://arxiv.org/pdf/1606.07792)
+[3] [DeepFM: A Factorization-Machine based Neural Network for CTR Prediction](https://arxiv.org/pdf/1703.04247)
+[4] [CatBoost is a high-performance open source library for gradient boosting on decision trees](https://catboost.ai/)
+[5] [Efficient Click-Through Rate Prediction for Developing Countries via Tabular Learning](https://arxiv.org/pdf/2104.07553)
+[6] [Hash Embeddings for Efficient Word Representations](https://proceedings.neurips.cc/paper/2017/file/f0f6ba4b5e0000340312d33c212c3ae8-Paper.pdf)
+[7] [Rank Ensemble](https://www.kaggle.com/code/finlay/amex-rank-ensemble)
