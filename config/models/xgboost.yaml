@@ -1,0 +1,20 @@
+name: xgboost
+
+params:
+  eta: 0.2
+  subsample: 0.8
+  colsample_bytree: 0.8
+  alpha: 0.01
+  lambda: 0.01
+  seed: 42
+  method: hist
+  device: cuda
+  objective: binary:logistic
+  n_jobs: -1
+
+path: res/models/
+results: 5fold-ctr-xgboost-0.4-seed1119
+early_stopping_rounds: 100
+num_boost_round: 10000
+verbose_eval: 100
+seed: 42

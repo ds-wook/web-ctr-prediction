@@ -21,8 +21,8 @@ class XGBoostTrainer(BaseModel):
         X_valid: pd.DataFrame | np.ndarray | None = None,
         y_valid: pd.Series | np.ndarray | None = None,
     ) -> xgb.Booster:
-        dtrain = xgb.DMatrix(X_train, y_train)
-        dvalid = xgb.DMatrix(X_valid, y_valid)
+        dtrain = xgb.DMatrix(X_train, y_train, enable_categorical=True)
+        dvalid = xgb.DMatrix(X_valid, y_valid, enable_categorical=True)
 
         params = OmegaConf.to_container(self.cfg.models.params)
         params["seed"] = self.cfg.models.seed
