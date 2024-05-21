@@ -152,4 +152,3 @@ class FeatureInteraction(nn.Module):
         reshape_result = flat_result.view(-1, out_dim)
 
         return reshape_result
-
