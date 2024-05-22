@@ -74,7 +74,8 @@ Running the learning code shell.
 
 
 ## Summary
-[TBD]
+![summary](https://github.com/ds-wook/web-ctr-prediction/assets/46340424/47e18189-528b-4858-a61e-5cb7305fc43c)
+
 
 ## Negative Sampling
 Negative sampling is very important in recommendation systems. This method is very effective when it is not possible to train on large volumes of data.
