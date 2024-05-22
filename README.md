@@ -63,17 +63,21 @@ Running the learning code shell.
 ## Benchmark
 ||cv|public-lb|private-lb|
 |-----|--|---------|----------|
-|5fold-lightgbm-0.45|0.7833|-|-|
-|5fold-catboost-0.45|0.7755|-|-|
+|5fold-lightgbm-0.4|0.7828|-|-|
+|5fold-catboost-0.4|0.7753|-|-|
+|5fold-wide&deep-0.4|0.7806|-|-|
+|5fold-deepFM-0.4|0.7790|-|-|
+|5fold-lightgbm-0.45|0.7833|0.7853|-|
+|5fold-catboost-0.45|0.7755|0.7766|-|
 |5fold-wide&deep-0.45|0.7812|0.7840|-|
-|5fold-deepFM-0.45|0.7791|0.7848|-|
+|5fold-deepFM-0.45|0.7791|0.7801|-|
 
 
 ## Summary
 [TBD]
 
 ## Negative Sampling
-추천분야에서 negative sampling은 매우 중요합니다. 대용량의 데이터를 학습 할수 없는 상황이라면 이러한 방법은 매우 효과적입니다.
+Negative sampling is very important in recommendation systems. This method is very effective when it is not possible to train on large volumes of data.
 
 ## Features
 #### Hash feature
@@ -83,7 +87,7 @@ Running the learning code shell.
 [TBD]
 
 ### Model
-정형 데이터의 특성상 GBDT 모델과 NN 모델을 학습해서 앙상블 하자는 전략을 세웠습니다.
+Due to the nature of Tabular data, we devised a strategy to train GBDT models and NN models and then ensemble them.
 
 #### GBDT
 + LightGBM
@@ -107,8 +111,8 @@ Running the learning code shell.
 ### Ensemble
 #### Rank Ensemble 
 + Use 18 models
-+ Data Sampling seed를 바꿔가며 학습한 결과를 앙상블함
-+ AUC를 최적화하기위해 Rank 방법론 적용
++ Ensemble the results by changing the data sampling seed during training.
++ Applied a ranking methodology to optimize AUC.
 
 ## Doesn't Work
 + Day Cross validation
@@ -118,10 +122,10 @@ Running the learning code shell.
 
 
 ## Reference
-[1] [LightGBM: A Highly Efficient Gradient Boosting Decision Tree](https://lightgbm.readthedocs.io/en/stable/)
-[2] [Wide & Deep Learning for Recommender Systems](https://arxiv.org/pdf/1606.07792)
-[3] [DeepFM: A Factorization-Machine based Neural Network for CTR Prediction](https://arxiv.org/pdf/1703.04247)
-[4] [CatBoost is a high-performance open source library for gradient boosting on decision trees](https://catboost.ai/)
-[5] [Efficient Click-Through Rate Prediction for Developing Countries via Tabular Learning](https://arxiv.org/pdf/2104.07553)
-[6] [Hash Embeddings for Efficient Word Representations](https://proceedings.neurips.cc/paper/2017/file/f0f6ba4b5e0000340312d33c212c3ae8-Paper.pdf)
-[7] [Rank Ensemble](https://www.kaggle.com/code/finlay/amex-rank-ensemble)
++ [LightGBM: A Highly Efficient Gradient Boosting Decision Tree](https://lightgbm.readthedocs.io/en/stable/)
++ [Wide & Deep Learning for Recommender Systems](https://arxiv.org/pdf/1606.07792)
++ [DeepFM: A Factorization-Machine based Neural Network for CTR Prediction](https://arxiv.org/pdf/1703.04247)
++ [CatBoost is a high-performance open source library for gradient boosting on decision trees](https://catboost.ai/)
++ [Efficient Click-Through Rate Prediction for Developing Countries via Tabular Learning](https://arxiv.org/pdf/2104.07553)
++ [Hash Embeddings for Efficient Word Representations](https://proceedings.neurips.cc/paper/2017/file/f0f6ba4b5e0000340312d33c212c3ae8-Paper.pdf)
++ [Rank Ensemble](https://www.kaggle.com/code/finlay/amex-rank-ensemble)

@@ -23,7 +23,7 @@ def _main(cfg: DictConfig):
     # Calculate average predictions
     submit[cfg.data.target] = np.average(preds, axis=0)
 
-    # Save the ensembled submission
+    # Save thae ensembled submission
     submit.to_csv(Path(cfg.output.path) / f"{cfg.output.name}.csv", index=False)
 
 
