@@ -82,7 +82,8 @@ Negative sampling is very important in recommendation systems. This method is ve
 
 ## Features
 #### Hash feature
-[TBD]
+![hash features](https://github.com/ds-wook/web-ctr-prediction/assets/46340424/0d7826bb-7754-4c46-b668-3bb44fbd595c)
+
 
 #### Gauss Rank
 [TBD]
