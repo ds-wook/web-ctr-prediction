@@ -63,7 +63,7 @@ Running the learning code shell.
 ## Benchmark
 ||cv|public-lb|private-lb|
 |-----|--|---------|----------|
-|5fold-lightgbm-0.4|0.7828|-|-|
+|5fold-lightgbm-0.4|0.7828|0.7848|-|
 |5fold-catboost-0.4|0.7753|-|-|
 |5fold-wide&deep-0.4|0.7806|-|-|
 |5fold-deepFM-0.4|0.7790|-|-|
@@ -74,7 +74,7 @@ Running the learning code shell.
 
 
 ## Summary
-![summary](https://github.com/ds-wook/web-ctr-prediction/assets/46340424/47e18189-528b-4858-a61e-5cb7305fc43c)
+![model summary](https://github.com/ds-wook/web-ctr-prediction/assets/46340424/442e1804-6dd1-45cb-a9af-35ce6f6d3100)
 
 
 ## Negative Sampling
@@ -87,6 +87,7 @@ Negative sampling is very important in recommendation systems. This method is ve
 
 #### Gauss Rank
 [TBD]
+Routine to rank a set of given ensemble forecasts according to their "value"
 
 ### Model
 Due to the nature of Tabular data, we devised a strategy to train GBDT models and NN models and then ensemble them.
