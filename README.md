@@ -75,7 +75,7 @@ To handle high cardinality categorical data, we transformed the features by hash
 #### Gauss Rank
 ![gauss rank](https://github.com/ds-wook/web-ctr-prediction/assets/46340424/4d9ce6bc-8d6c-41f4-b001-298bb4538265)
 
-Routine to rank a set of given ensemble forecasts according to their "value"
+Routine to rank a set of given ensemble forecasts according to their "value".
 This method normally distributes the distribution of each numerical data, resulting in better performance for the model. Experimental results show higher performance than ``MinMaxScaler``.
 
 ### Model
