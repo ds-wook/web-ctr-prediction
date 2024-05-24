@@ -9,7 +9,7 @@ from omegaconf import DictConfig
 from tqdm import tqdm
 
 
-def calculate_sigmoid_result(values: list[np.ndarray], weight: list[float]) -> np.ndarray:
+def calculate_sigmoid_preds(values: list[np.ndarray], weight: list[float]) -> np.ndarray:
     """
     Calculate the sigmoid result of the ensemble predictions.
     :param values: list of predictions
@@ -38,7 +38,7 @@ def _main(cfg: DictConfig):
 
     # Calculate average predictions with equal weights
     weights = [1 / len(preds)] * len(preds)
-    submit[cfg.data.target] = calculate_sigmoid_result(preds, weights)
+    submit[cfg.data.target] = calculate_sigmoid_preds(preds, weights)
 
     # Save the ensembled submission
     submit.to_csv(Path(cfg.output.path) / f"{cfg.output.name}.csv", index=False)
