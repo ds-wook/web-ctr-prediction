@@ -103,7 +103,7 @@ Due to the nature of Tabular data, we devised a strategy to train GBDT models an
 ### Ensemble
 #### Sigmoid Ensemble 
 I used the concept of log-odds from logistic regression to construct an ensemble:
-$$𝑓(𝑥)=\frac{1}{1+\exp^{-x}}$$
+$$𝑓(𝑥)=\frac{1}{1 + e^{-x}}$$
 $$f^{-1}(x)= \log(\frac{x}{1-x})$$
 $$\hat{y}=f(\sum_i^nw_i \cdot f^{-1}(x_i))=W^T \cdot \hat{Y}$$
 
