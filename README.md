@@ -70,9 +70,11 @@ Negative sampling is very important in recommendation systems. This method is ve
 #### Hash feature
 ![hash features](https://github.com/ds-wook/web-ctr-prediction/assets/46340424/0d7826bb-7754-4c46-b668-3bb44fbd595c)
 
+To handle high cardinality categorical data, we transformed the features by hashing them.
 
 #### Gauss Rank
-[TBD]
+![gauss rank](https://github.com/ds-wook/web-ctr-prediction/assets/46340424/a73097d7-f0db-4af2-a678-d12d521b8f4a)
+
 Routine to rank a set of given ensemble forecasts according to their "value"
 
 ### Model
