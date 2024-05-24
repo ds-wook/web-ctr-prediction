@@ -1,7 +1,6 @@
 # web-ctr-prediction
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)  
-웹 광고 클릭률 예측 AI 경진대회
-
+web ctr competition
 
 ## Setting
 - CPU: i7-11799K core 8
@@ -76,6 +75,7 @@ Running the learning code shell.
 ## Summary
 ![model summary](https://github.com/ds-wook/web-ctr-prediction/assets/46340424/442e1804-6dd1-45cb-a9af-35ce6f6d3100)
 
+Simple is better than complex
 
 ## Negative Sampling
 Negative sampling is very important in recommendation systems. This method is very effective when it is not possible to train on large volumes of data.

@@ -77,7 +77,6 @@ class DataStorage:
         if self.cfg.models.name in ["lightgbm", "xgboost"]:
             train = feature_engineering.add_hash_features(train)
             train = feature_engineering.convert_categorical_features(train)
-            train = self._numerical_train_scaling(train)
             train = feature_engineering.combine_features(train)
 
         else:
@@ -100,7 +99,6 @@ class DataStorage:
         if self.cfg.models.name in ["lightgbm", "xgboost"]:
             test = feature_engineering.add_hash_features(test)
             test = feature_engineering.convert_categorical_features(test)
-            test = self._numerical_test_scaling(test)
             test = feature_engineering.combine_features(test)
 
         else:

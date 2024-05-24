@@ -14,11 +14,10 @@ hydra:
 output:
   path: output
   submission: sample_submission
-  name: rank-ensemble-4models-more-seed
+  name: sigmoid-ensemble-4models-more-seed
 
 preds:
 - 5fold-ctr-lightgbm-0.4-seed42
-- 5fold-ctr-lightgbm-0.4-seed414
 - 5fold-ctr-lightgbm-0.4-seed517
 - 5fold-ctr-lightgbm-0.4-seed602
 - 5fold-ctr-lightgbm-0.4-seed1119
@@ -27,15 +26,12 @@ preds:
 - 5fold-ctr-catboost-0.4-seed517
 - 5fold-ctr-catboost-0.4-seed1119
 - 5fold-ctr-catboost-0.45-seed517
-- 5fold-ctr-catboost-0.45-seed602
 - 5fold-ctr-catboost-0.45-seed1119
 - 5fold-ctr-wdl-0.4-seed414
 - 5fold-ctr-wdl-0.4-seed517
-- 5fold-ctr-wdl-0.4-seed1119
 - 5fold-ctr-wdl-0.45-seed517
 - 5fold-ctr-wdl-0.45-seed1119
 - 5fold-ctr-deepfm-0.4-seed414
 - 5fold-ctr-deepfm-0.4-seed517
-- 5fold-ctr-deepfm-0.4-seed1119
 - 5fold-ctr-deepfm-0.45-seed517
 - 5fold-ctr-deepfm-0.45-seed1119

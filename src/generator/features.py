@@ -28,6 +28,15 @@ class FeatureEngineering:
 
         return df
 
+    def convert_num_features(self, df: pd.DataFrame) -> pd.DataFrame:
+        with tqdm(total=len(self.cfg.generator.cat_features), desc="Convert features") as pbar:
+            # Convert to category type
+            for col in self.cfg.generator.num_features:
+                df[col] = np.log1p(df[col])
+                pbar.update(1)
+
+        return df
+
     def combine_features(self, df: pd.DataFrame) -> pd.DataFrame:
         df["F14_18"] = df["F14"] * df["F18"]
         df["F18_36"] = df["F18"] * df["F36"]

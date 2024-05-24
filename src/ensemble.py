@@ -6,7 +6,23 @@ import hydra
 import numpy as np
 import pandas as pd
 from omegaconf import DictConfig
-from scipy.stats import rankdata
+from tqdm import tqdm
+
+
+def calculate_sigmoid_result(values: list[np.ndarray], weight: list[float]) -> np.ndarray:
+    """
+    Calculate the sigmoid result of the ensemble predictions.
+    :param values: list of predictions
+    :param weight: list of weights
+    :return: ensemble prediction
+    """
+    values = np.array(values)
+    weight = np.array(weight)
+
+    logit_values = np.log(values / (1 - values))
+    result = np.dot(weight, logit_values)
+
+    return 1 / (1 + np.exp(-result))
 
 
 @hydra.main(config_path="../config/", config_name="ensemble", version_base="1.3.1")
@@ -16,14 +32,15 @@ def _main(cfg: DictConfig):
 
     # Load predictions and calculate ranks
     preds = [
-        rankdata(pd.read_csv(Path(cfg.output.path) / f"{pred}.csv")[cfg.data.target].to_numpy()) / len(submit)
-        for pred in cfg.preds
+        pd.read_csv(Path(cfg.output.path) / f"{pred}.csv")[cfg.data.target].to_numpy()
+        for pred in tqdm(cfg.preds, desc="Loading predictions", colour="red", total=len(cfg.preds))
     ]
 
-    # Calculate average predictions
-    submit[cfg.data.target] = np.average(preds, axis=0)
+    # Calculate average predictions with equal weights
+    weights = [1 / len(preds)] * len(preds)
+    submit[cfg.data.target] = calculate_sigmoid_result(preds, weights)
 
-    # Save thae ensembled submission
+    # Save the ensembled submission
     submit.to_csv(Path(cfg.output.path) / f"{cfg.output.name}.csv", index=False)
 
 
