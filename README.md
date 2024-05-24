@@ -105,7 +105,7 @@ Due to the nature of Tabular data, we devised a strategy to train GBDT models an
 I used the concept of log-odds from logistic regression to construct an ensemble:
 $$𝑓(𝑥)=\frac{1}{1+\exp^{-x}}$$
 $$f^{-1}(x)= \log(\frac{x}{1-x})$$
-$$\hat{y}=f(\sum_i^nw_i *f^{-1}(x))=W^T \bullet \hat{Y}$$
+$$\hat{y}=f(\sum_i^nw_i \cdot f^{-1}(x_i))=W^T \cdot \hat{Y}$$
 
 + It seems to perform better than other ensembles (Rank, Voting).
 + Since the prediction values are probabilities, we used the logit function and its inverse to perform bagging for the ensemble.

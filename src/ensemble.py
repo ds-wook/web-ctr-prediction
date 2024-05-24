@@ -37,8 +37,7 @@ def _main(cfg: DictConfig):
     ]
 
     # Calculate average predictions with equal weights
-    weights = [1 / len(preds)] * len(preds)
-    submit[cfg.data.target] = calculate_sigmoid_preds(preds, weights)
+    submit[cfg.data.target] = calculate_sigmoid_preds(preds, [*cfg.weights])
 
     # Save the ensembled submission
     submit.to_csv(Path(cfg.output.path) / f"{cfg.output.name}.csv", index=False)
