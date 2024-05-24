@@ -79,7 +79,7 @@ Routine to rank a set of given ensemble forecasts according to their "value".
 This method normally distributes the distribution of each numerical data, resulting in better performance for the model. Experimental results show higher performance than ``MinMaxScaler``.
 
 ### Model
-Due to the nature of Tabular data, we devised a strategy to train GBDT models and NN models and then ensemble them.
+Considering the characteristics of tabular data, we devised a strategy to train GBDT models and NN models, and then ensemble them.
 
 #### GBDT
 + LightGBM
