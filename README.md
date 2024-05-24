@@ -58,26 +58,6 @@ Running the learning code shell.
         output.name=5fold-ctr-${MODEL_NAME}-${SAMPLING}-day-seed${SEED}
    ```
 
-
-## Benchmark
-+ Each model result
-
-|Model|cv|public-lb|private-lb|
-|-----|--|---------|----------|
-|lightgbm-0.45|**0.7833**|**0.7853**|-|
-|catboost-0.45|0.7755|0.7766|-|
-|wide&deep-0.45|0.7812|0.7840|-|
-|deepFM-0.45|0.7791|0.7801|-|
-
-+ Ensemble result
-
-|Method|public-lb|private-lb|
-|------|---------|----------|
-|Rank Ensemble|0.7889|-|
-|Average Ensemble|0.7892|-|
-|Weighted average Ensemble|0.7891|-|
-|Sigmoid Ensemble|**0.7893**|-|
-
 ## Summary
 ![model summary](https://github.com/ds-wook/web-ctr-prediction/assets/46340424/e0d915dd-fad1-4bc9-959b-90025c15043e)
 
@@ -126,6 +106,27 @@ $$\hat{y}=f(\sum_i^nw_i *f^{-1}(x))=W^T \bullet \hat{Y}$$
 
 + It seems to perform better than other ensembles (Rank, Voting).
 + Since the prediction values are probabilities, we used the logit function and its inverse to perform bagging for the ensemble.
+
+
+## Benchmark
++ Each model result
+
+|Model|cv|public-lb|private-lb|
+|-----|--|---------|----------|
+|lightgbm-0.45|**0.7833**|**0.7853**|-|
+|catboost-0.45|0.7755|0.7766|-|
+|wide&deep-0.45|0.7812|0.7840|-|
+|deepFM-0.45|0.7791|0.7801|-|
+
+
++ Ensemble result
+
+|Method|public-lb|private-lb|
+|------|---------|----------|
+|Rank Ensemble|0.7889|-|
+|Average Ensemble|0.7892|-|
+|Weighted average Ensemble|0.7891|-|
+|Sigmoid Ensemble|**0.7893**|-|
 
 
 ## Doesn't Work
