@@ -28,6 +28,7 @@ Running the learning code shell.
    ```sh
    $ python scripts/covert_to_parquet.py
    $ sh scripts/run_lgb_experiment.sh
+   $ sh scripts/run_cb_experiment.sh
    $ sh scripts/run_wdl_experiment.sh
    $ sh scripts/run_deepfm_experiment.sh
    $ python src/ensemble.py
