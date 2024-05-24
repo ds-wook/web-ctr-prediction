@@ -18,6 +18,7 @@ output:
 
 preds:
 - 5fold-ctr-lightgbm-0.4-seed42
+- 5fold-ctr-lightgbm-0.4-seed414
 - 5fold-ctr-lightgbm-0.4-seed517
 - 5fold-ctr-lightgbm-0.4-seed602
 - 5fold-ctr-lightgbm-0.4-seed1119

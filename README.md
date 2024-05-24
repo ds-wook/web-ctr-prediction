@@ -73,7 +73,7 @@ Running the learning code shell.
 
 
 ## Summary
-![model summary](https://github.com/ds-wook/web-ctr-prediction/assets/46340424/442e1804-6dd1-45cb-a9af-35ce6f6d3100)
+![model summary](https://github.com/ds-wook/web-ctr-prediction/assets/46340424/e0d915dd-fad1-4bc9-959b-90025c15043e)
 
 Simple is better than complex
 
@@ -112,10 +112,15 @@ Due to the nature of Tabular data, we devised a strategy to train GBDT models an
     + StratifiedKFold: 5
 
 ### Ensemble
-#### Rank Ensemble 
-+ Use 18 models
-+ Ensemble the results by changing the data sampling seed during training.
-+ Applied a ranking methodology to optimize AUC.
+#### Sigmoid Ensemble 
+I used the concept of log-odds from logistic regression to construct an ensemble:
+$$𝑓(𝑥)=\frac{1}{1+\exp^{-x}}$$
+$$f^{-1}(x)= \log(\frac{x}{1-x})$$
+$$\hat{y}=f(\sum_i^nw_i *f^{-1}(x))=W^T \bullet \hat{Y}$$
+
++ It seems to perform better than other ensembles (Rank, Voting).
++ Since the prediction values are probabilities, we used the logit function and its inverse to perform bagging for the ensemble.
+
 
 ## Doesn't Work
 + Day Cross validation
@@ -130,5 +135,6 @@ Due to the nature of Tabular data, we devised a strategy to train GBDT models an
 + [DeepFM: A Factorization-Machine based Neural Network for CTR Prediction](https://arxiv.org/pdf/1703.04247)
 + [CatBoost is a high-performance open source library for gradient boosting on decision trees](https://catboost.ai/)
 + [Efficient Click-Through Rate Prediction for Developing Countries via Tabular Learning](https://arxiv.org/pdf/2104.07553)
++ [Label Encoder](https://github.com/jeongyoonlee/Kaggler/blob/master/kaggler/preprocessing/categorical.py)
 + [Hash Embeddings for Efficient Word Representations](https://proceedings.neurips.cc/paper/2017/file/f0f6ba4b5e0000340312d33c212c3ae8-Paper.pdf)
-+ [Rank Ensemble](https://www.kaggle.com/code/finlay/amex-rank-ensemble)
++ [Sigmoid Ensemble](https://www.kaggle.com/competitions/amex-default-prediction/discussion/329103)
