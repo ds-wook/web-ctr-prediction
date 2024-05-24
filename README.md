@@ -73,9 +73,10 @@ Negative sampling is very important in recommendation systems. This method is ve
 To handle high cardinality categorical data, we transformed the features by hashing them.
 
 #### Gauss Rank
-![gauss rank](https://github.com/ds-wook/web-ctr-prediction/assets/46340424/a73097d7-f0db-4af2-a678-d12d521b8f4a)
+![gauss rank](https://github.com/ds-wook/web-ctr-prediction/assets/46340424/4d9ce6bc-8d6c-41f4-b001-298bb4538265)
 
 Routine to rank a set of given ensemble forecasts according to their "value"
+This method normally distributes the distribution of each numerical data, resulting in better performance for the model. Experimental results show higher performance than ``MinMaxScaler``.
 
 ### Model
 Due to the nature of Tabular data, we devised a strategy to train GBDT models and NN models and then ensemble them.
