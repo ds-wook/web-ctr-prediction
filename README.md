@@ -60,17 +60,23 @@ Running the learning code shell.
 
 
 ## Benchmark
-||cv|public-lb|private-lb|
-|-----|--|---------|----------|
-|5fold-lightgbm-0.4|0.7828|0.7848|-|
-|5fold-catboost-0.4|0.7753|-|-|
-|5fold-wide&deep-0.4|0.7806|-|-|
-|5fold-deepFM-0.4|0.7790|-|-|
-|5fold-lightgbm-0.45|0.7833|0.7853|-|
-|5fold-catboost-0.45|0.7755|0.7766|-|
-|5fold-wide&deep-0.45|0.7812|0.7840|-|
-|5fold-deepFM-0.45|0.7791|0.7801|-|
++ Each model result
 
+|Model|cv|public-lb|private-lb|
+|-----|--|---------|----------|
+|lightgbm-0.45|**0.7833**|**0.7853**|-|
+|catboost-0.45|0.7755|0.7766|-|
+|wide&deep-0.45|0.7812|0.7840|-|
+|deepFM-0.45|0.7791|0.7801|-|
+
++ Ensemble result
+
+|Method|public-lb|private-lb|
+|------|---------|----------|
+|Rank Ensemble|0.7889|-|
+|Average Ensemble|0.7892|-|
+|Weighted average Ensemble|0.7891|-|
+|Sigmoid Ensemble|**0.7893**|-|
 
 ## Summary
 ![model summary](https://github.com/ds-wook/web-ctr-prediction/assets/46340424/e0d915dd-fad1-4bc9-959b-90025c15043e)
@@ -127,6 +133,7 @@ $$\hat{y}=f(\sum_i^nw_i *f^{-1}(x))=W^T \bullet \hat{Y}$$
 + Day feature
 + Catboost with cat_features parameter
 + XGBoost with GPU
++ Learning rate: need more RAM
 
 
 ## Reference
