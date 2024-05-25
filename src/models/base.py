@@ -7,11 +7,12 @@ from pathlib import Path
 from typing import Any
 
 import joblib
+import lightgbm as lgb
 import numpy as np
 import pandas as pd
 import xgboost as xgb
 from catboost import CatBoostClassifier
-from deepctr_torch.models import WDL, DeepFM
+from deepctr_torch.models import DIFM, WDL, DeepFM
 from omegaconf import DictConfig
 from sklearn.metrics import roc_auc_score
 from sklearn.model_selection import StratifiedKFold
@@ -60,14 +61,17 @@ class BaseModel(ABC):
         elif isinstance(model, CatBoostClassifier):
             return model.predict_proba(X)[:, 1]
 
-        elif isinstance(model, DeepFM | WDL):
+        elif isinstance(model, DeepFM | WDL | DIFM):
             feature_names = [*self.cfg.generator.sparse_features, *self.cfg.generator.dense_features]
             valid_model_input = {name: X[name] for name in feature_names}
 
             return model.predict(valid_model_input, batch_size=64).flatten()
 
-        else:
+        elif isinstance(model, lgb.Booster):
             return model.predict(X)
+
+        else:
+            raise ValueError("Model not supported")
 
     def run_cv_training(self, X: pd.DataFrame, y: pd.Series) -> Self:
         oof_preds = np.zeros(X.shape[0])

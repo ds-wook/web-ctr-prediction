@@ -17,10 +17,9 @@ def calculate_sigmoid_preds(values: list[np.ndarray], weight: list[float]) -> np
     :return: ensemble prediction
     """
     values = np.array(values)
-    weight = np.array(weight)
 
     logit_values = np.log(values / (1 - values))
-    result = np.dot(weight, logit_values)
+    result = np.mean(logit_values, axis=0)
 
     return 1 / (1 + np.exp(-result))
 

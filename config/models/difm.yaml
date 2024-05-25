@@ -1,4 +1,4 @@
-name: wdl
+name: difm
 
 device: cuda:0
 seed: 42
@@ -11,7 +11,7 @@ verbose: 1
 patience: 2
 mode: min
 batch_size: 4096
-epochs: 5
+epochs: 2
 
 path: res/models/
-results: 5fold-ctr-wdl-0.4-seed42
+results: 5fold-ctr-mmoe-0.4-seed414
