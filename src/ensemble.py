@@ -36,8 +36,8 @@ def _main(cfg: DictConfig):
         for pred in tqdm(cfg.preds, desc="Loading predictions", colour="red", total=len(cfg.preds))
     ]
 
-    weights = [1 / len(cfg.preds)] * len(cfg.preds)
     # Calculate average predictions with equal weights
+    weights = [1 / len(cfg.preds)] * len(cfg.preds)
     submit[cfg.data.target] = calculate_sigmoid_preds(preds, weights)
 
     # Save the ensembled submission
