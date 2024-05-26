@@ -7,7 +7,7 @@ import hydra
 from omegaconf import DictConfig
 
 from data import DataStorage
-from models import bulid_model
+from models import build_model
 
 
 @hydra.main(config_path="../config/", config_name="train", version_base="1.2.0")
@@ -23,7 +23,7 @@ def _main(cfg: DictConfig):
         print(train_y.value_counts(normalize=True))
 
         # choose trainer
-        trainer = bulid_model(cfg)
+        trainer = build_model(cfg)
 
         # train model
         trainer.run_cv_training(train_x, train_y)

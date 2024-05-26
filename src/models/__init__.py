@@ -10,7 +10,7 @@ BulidModel = (
 )
 
 
-def bulid_model(cfg: DictConfig) -> BulidModel:
+def build_model(cfg: DictConfig) -> BulidModel:
     model_type = {
         "lightgbm": LightGBMTrainer(cfg),
         "xgboost": XGBoostTrainer(cfg),
