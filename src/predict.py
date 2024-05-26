@@ -8,7 +8,8 @@ import lightgbm as lgb
 import numpy as np
 import pandas as pd
 import xgboost as xgb
-from deepctr_torch.models import WDL, DeepFM
+from catboost import CatBoostClassifier
+from deepctr_torch.models import DIFM, WDL, DeepFM, xDeepFM
 from omegaconf import DictConfig
 from tqdm import tqdm
 
@@ -35,14 +36,17 @@ def inference_models(cfg: DictConfig, test_x: pd.DataFrame | dict[str, pd.Series
         elif isinstance(model, xgb.Booster):
             preds += model.predict(xgb.DMatrix(test_x)) / folds
 
-        elif isinstance(model, DeepFM | WDL):
+        elif isinstance(model, DIFM | WDL | DeepFM | xDeepFM):
             test_model_input = {
                 name: test_x[name] for name in [*cfg.generator.sparse_features, *cfg.generator.dense_features]
             }
             preds += model.predict(test_model_input, batch_size=64).flatten() / folds
 
-        else:
+        elif isinstance(model, CatBoostClassifier):
             preds += model.predict_proba(test_x)[:, 1] / folds
+
+        else:
+            raise ValueError(f"Model {model} not supported")
 
     return preds
 
