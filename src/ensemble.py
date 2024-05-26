@@ -9,7 +9,7 @@ from omegaconf import DictConfig
 from tqdm import tqdm
 
 
-def calculate_sigmoid_preds(values: list[np.ndarray], weights: list[float]) -> np.ndarray:
+def calculate_sigmoid_preds(values: list[np.ndarray]) -> np.ndarray:
     """
     Calculate the sigmoid result of the ensemble predictions.
     :param values: list of predictions
@@ -17,10 +17,9 @@ def calculate_sigmoid_preds(values: list[np.ndarray], weights: list[float]) -> n
     :return: ensemble prediction
     """
     values = np.array(values)
-    weights = np.array(weights)
 
     logit_values = np.log(values / (1 - values))
-    result = np.dot(weights, logit_values)
+    result = np.mean(logit_values, axis=0)
 
     return 1 / (1 + np.exp(-result))
 
@@ -36,9 +35,8 @@ def _main(cfg: DictConfig):
         for pred in tqdm(cfg.preds, desc="Loading predictions", colour="red", total=len(cfg.preds))
     ]
 
-    # Calculate average predictions with equal weights
-    weights = [1 / len(cfg.preds)] * len(cfg.preds)
-    submit[cfg.data.target] = calculate_sigmoid_preds(preds, weights)
+    # Calculate average predictions
+    submit[cfg.data.target] = calculate_sigmoid_preds(preds)
 
     # Save the ensembled submission
     submit.to_csv(Path(cfg.output.path) / f"{cfg.output.name}.csv", index=False)

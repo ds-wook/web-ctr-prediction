@@ -121,7 +121,7 @@ $$\hat{y}=f(\frac{1}{n}\sum_i^n f^{-1}(x_i))=f(\mathbb{E}[f^{-1}(X)])$$
 |catboost-0.45|0.7755|0.7766|-|
 |wide&deep-0.45|0.7812|0.7840|-|
 |DeepFM-0.45|0.7791|0.7801|-|
-|xDeepFM-0.45|0.7791|0.7801|-|
+|xDeepFM-0.45|0.7819|0.7801|-|
 
 + Ensemble result
 

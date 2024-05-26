@@ -1,8 +1,8 @@
 export PYTHONHASHSEED=0
 
 MODEL_NAME="xdeepfm"
-SAMPLING=0.45
-SEED=517
+SAMPLING=0.4
+SEED=1119
 
 python src/train.py \
     data.train=train_sample_${SAMPLING}_seed${SEED} \

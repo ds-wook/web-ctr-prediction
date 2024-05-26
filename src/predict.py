@@ -29,7 +29,7 @@ def inference_models(cfg: DictConfig, test_x: pd.DataFrame | dict[str, pd.Series
     folds = len(results.models)
     preds = np.zeros((test_x.shape[0],))
 
-    for model in tqdm(results.models.values(), total=folds, desc="Predicting models"):
+    for model in tqdm(results.models.values(), total=folds, desc="Predicting models", colour="blue"):
         if isinstance(model, lgb.Booster):
             preds += model.predict(test_x) / folds
 
