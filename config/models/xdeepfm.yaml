@@ -11,7 +11,7 @@ verbose: 1
 patience: 2
 mode: min
 batch_size: 4096
-epochs: 5
+epochs: 3
 
 path: res/models/
 results: 5fold-ctr-dien-0.4-seed414

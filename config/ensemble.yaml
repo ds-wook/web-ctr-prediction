@@ -16,25 +16,6 @@ output:
   submission: sample_submission
   name: weighted-sigmoid-ensemble-4models-more-seed
 
-weights:
-  - 0.05
-  - 0.05
-  - 0.05
-  - 0.05
-  - 0.05
-  - 0.1
-  - 0.1
-  - 0.025
-  - 0.025
-  - 0.05
-  - 0.05
-  - 0.1
-  - 0.1
-  - 0.05
-  - 0.05
-  - 0.05
-  - 0.05
-
 preds:
 - 5fold-ctr-lightgbm-0.4-seed42
 - 5fold-ctr-lightgbm-0.4-seed414

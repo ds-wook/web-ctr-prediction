@@ -106,7 +106,7 @@ Considering the characteristics of tabular data, we devised a strategy to train 
 I used the concept of log-odds from logistic regression to construct an ensemble:
 $$𝑓(𝑥)=\frac{1}{1 + e^{-x}}$$
 $$f^{-1}(x)= \log(\frac{x}{1-x})$$
-$$\hat{y}=f(\sum_i^nw_i \cdot f^{-1}(x_i))=W^T \cdot \hat{Y}$$
+$$\hat{y}=f(\frac{1}{n}\sum_i^n f^{-1}(x_i))=f(\mathbb{E}[f^{-1}(X)])$$
 
 + It seems to perform better than other ensembles (Rank, Voting).
 + Since the prediction values are probabilities, we used the logit function and its inverse to perform bagging for the ensemble.
@@ -120,8 +120,8 @@ $$\hat{y}=f(\sum_i^nw_i \cdot f^{-1}(x_i))=W^T \cdot \hat{Y}$$
 |lightgbm-0.45|**0.7833**|**0.7853**|-|
 |catboost-0.45|0.7755|0.7766|-|
 |wide&deep-0.45|0.7812|0.7840|-|
-|deepFM-0.45|0.7791|0.7801|-|
-
+|DeepFM-0.45|0.7791|0.7801|-|
+|xDeepFM-0.45|0.7791|0.7801|-|
 
 + Ensemble result
 

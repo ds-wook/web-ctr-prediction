@@ -25,4 +25,4 @@ def build_model(cfg: DictConfig) -> BulidModel:
         return trainer
 
     else:
-        raise NotImplementedError
+        raise NotImplementedError(f"Model '{cfg.models.name}' is not implemented.")
