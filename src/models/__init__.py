@@ -3,13 +3,12 @@ from omegaconf import DictConfig
 from .base import *
 from .boosting import *
 from .boosting import CatBoostTrainer, LightGBMTrainer, XGBoostTrainer
-from .dlrm import AutoIntTrainer, DeepFMTrainer, FiBiNetTranier, WDLTrainer, XDeepFMTrainer
+from .dlrm import AutoIntTrainer, FiBiNetTranier, WDLTrainer, XDeepFMTrainer
 
 BulidModel = (
     CatBoostTrainer
     | LightGBMTrainer
     | XGBoostTrainer
-    | DeepFMTrainer
     | WDLTrainer
     | FiBiNetTranier
     | XDeepFMTrainer
@@ -22,7 +21,6 @@ def build_model(cfg: DictConfig) -> BulidModel:
         "lightgbm": LightGBMTrainer(cfg),
         "xgboost": XGBoostTrainer(cfg),
         "catboost": CatBoostTrainer(cfg),
-        "deepfm": DeepFMTrainer(cfg),
         "wdl": WDLTrainer(cfg),
         "fibinet": FiBiNetTranier(cfg),
         "xdeepfm": XDeepFMTrainer(cfg),
