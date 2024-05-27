@@ -1,17 +1,17 @@
-name: difm
+name: autoint
 
 device: cuda:0
 seed: 42
 l2_reg_linear: 0.0001
 l2_reg_embedding: 0.0001
 dnn_activation: prelu
-lr: 0.00001
+lr: 0.0001
 dnn_dropout: 0.5
 verbose: 1
 patience: 2
 mode: min
 batch_size: 4096
-epochs: 5
+epochs: 2
 
 path: res/models/
-results: 5fold-ctr-mmoe-0.4-seed414
+results: 5fold-ctr-autoint-0.4-seed414

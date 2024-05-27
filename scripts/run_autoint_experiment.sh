@@ -1,7 +1,7 @@
 export PYTHONHASHSEED=0
 
-MODEL_NAME="deepfm"
-SAMPLING=0.4
+MODEL_NAME="autoint"
+SAMPLING=0.45
 SEED=1119
 
 python src/train.py \
