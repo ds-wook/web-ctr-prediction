@@ -27,11 +27,11 @@ Running the learning code shell.
 
    ```sh
    $ python scripts/covert_to_parquet.py
-   $ sh scripts/run_lgb_experiment.sh
-   $ sh scripts/run_cb_experiment.sh
-   $ sh scripts/run_wdl_experiment.sh
-   $ sh scripts/run_xdeepfm_experiment.sh
-   $ sh scripts/run_fibinet_experiment.sh
+   $ sh scripts/lgb_experiment.sh
+   $ sh scripts/cb_experiment.sh
+   $ sh scripts/wdl_experiment.sh
+   $ sh scripts/xdeepfm_experiment.sh
+   $ sh scripts/fibinet_experiment.sh
    $ python src/ensemble.py
    ```
 
@@ -136,7 +136,7 @@ $$\hat{y}=f(\frac{1}{n}\sum_i^n f^{-1}(x_i))=f(\mathbb{E}[f^{-1}(X)])$$
 |Rank Ensemble|0.7889|-|
 |Average Ensemble|0.7892|-|
 |Weighted average Ensemble|0.7891|-|
-|Sigmoid Ensemble|**0.7893**|-|
+|Sigmoid Ensemble|**0.7896**|-|
 
 
 ## Doesn't Work

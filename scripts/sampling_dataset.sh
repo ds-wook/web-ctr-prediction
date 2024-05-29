@@ -1,5 +1,3 @@
-export PYTHONHASHSEED=0
-
 for sampling in 0.4 0.45 0.5
 do
     for seed in 42 517 1119

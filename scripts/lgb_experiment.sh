@@ -1,5 +1,3 @@
-export PYTHONHASHSEED=0
-
 MODEL_NAME="lightgbm"
 SAMPLING=0.45
 

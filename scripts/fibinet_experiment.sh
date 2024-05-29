@@ -1,5 +1,3 @@
-export PYTHONHASHSEED=0
-
 MODEL_NAME="fibinet"
 SAMPLING=0.45
 
