@@ -3,6 +3,7 @@ from pathlib import Path
 import joblib
 import pandas as pd
 import torch
+from category_encoders import CountEncoder
 from omegaconf import DictConfig
 from sklearn.preprocessing import QuantileTransformer
 
@@ -41,6 +42,36 @@ class DataStorage:
 
         return test_x
 
+    def _count_train_features(self, train_x: pd.DataFrame) -> pd.DataFrame:
+        """Categorical encoding for train data
+        Args:
+            config: config
+            train: dataframe
+        Returns:
+            dataframe
+        """
+        cnt = CountEncoder()
+        train_enc = cnt.fit_transform(train_x[[*self.cfg.generator.cat_features]])
+        train_x = train_x.join(train_enc.add_suffix("_count"))
+        joblib.dump(cnt, Path(self.cfg.data.meta) / "count_encoder.pkl")
+
+        return train_x
+
+    def _count_test_features(self, test_x: pd.DataFrame) -> pd.DataFrame:
+        """Categorical encoding for test data
+        Args:
+            config: config
+            test: dataframe
+        Returns:
+            dataframe
+        """
+
+        cnt = joblib.load(Path(self.cfg.data.meta) / "count_encoder.pkl")
+        test_enc = cnt.transform(test_x[[*self.cfg.generator.cat_features]])
+        test_x = test_x.join(test_enc.add_suffix("_count"))
+
+        return test_x
+
     def _numerical_train_scaling(self, train: pd.DataFrame) -> pd.DataFrame:
         """Numerical scaling
         Args:
@@ -75,9 +106,9 @@ class DataStorage:
         feature_engineering = FeatureEngineering(self.cfg)
 
         if self.cfg.models.name in ["lightgbm", "xgboost"]:
-            train = feature_engineering.add_hash_features(train)
+            train = self._categorize_train_features(train)
             train = feature_engineering.convert_categorical_features(train)
-            train = feature_engineering.combine_features(train)
+            train = self._count_train_features(train)
 
         else:
             train = self._categorize_train_features(train)
@@ -97,9 +128,9 @@ class DataStorage:
         feature_engineering = FeatureEngineering(self.cfg)
 
         if self.cfg.models.name in ["lightgbm", "xgboost"]:
-            test = feature_engineering.add_hash_features(test)
+            test = self._categorize_test_features(test)
             test = feature_engineering.convert_categorical_features(test)
-            test = feature_engineering.combine_features(test)
+            test = self._count_test_features(test)
 
         else:
             test = self._categorize_test_features(test)

@@ -68,10 +68,9 @@ Simple is better than complex
 Negative sampling is very important in recommendation systems. This method is very effective when it is not possible to train on large volumes of data.
 
 ## Features
-#### Hash feature
-![hash features](https://github.com/ds-wook/web-ctr-prediction/assets/46340424/0d7826bb-7754-4c46-b668-3bb44fbd595c)
+#### Label Encoder
 
-To handle high cardinality categorical data, we transformed the features by hashing them.
+#### Count features
 
 #### Gauss Rank
 ![gauss rank](https://github.com/ds-wook/web-ctr-prediction/assets/46340424/4d9ce6bc-8d6c-41f4-b001-298bb4538265)
@@ -138,8 +137,7 @@ $$\hat{y}=f(\frac{1}{n}\sum_i^n f^{-1}(x_i))=f(\mathbb{E}[f^{-1}(X)])$$
 + Day feature
 + Catboost with cat_features parameter
 + XGBoost with GPU
-+ Learning rate: need more RAM
-
++ Hash features: need more RAM
 
 ## Reference
 + [LightGBM: A Highly Efficient Gradient Boosting Decision Tree](https://lightgbm.readthedocs.io/en/stable/)

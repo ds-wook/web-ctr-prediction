@@ -4,9 +4,9 @@ params:
   boosting_type: gbdt
   objective: binary
   metric: auc
-  learning_rate: 0.08
+  learning_rate: 0.05
   bagging_seed: 602
-  num_leaves: 128
+  num_leaves: 200
   max_depth: -1
   min_child_weight: 0.03
   bagging_fraction: 0.4
