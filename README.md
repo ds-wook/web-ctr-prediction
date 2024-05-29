@@ -30,33 +30,30 @@ Running the learning code shell.
    $ sh scripts/run_lgb_experiment.sh
    $ sh scripts/run_cb_experiment.sh
    $ sh scripts/run_wdl_experiment.sh
-   $ sh scripts/run_deepfm_experiment.sh
+   $ sh scripts/run_xdeepfm_experiment.sh
+   $ sh scripts/run_fibinet_experiment.sh
    $ python src/ensemble.py
    ```
 
    Examples are as follows.
 
    ```sh
-    export PYTHONHASHSEED=0
-
     MODEL_NAME="lightgbm"
-    SAMPLING=0.4
-    SEED=42
+    SAMPLING=0.45
 
-    python src/sampling.py \
-        data.seed=${SEED} \
-        data.sampling=${SAMPLING} \
-        data.train=train_day_sample_${SAMPLING}_seed${SEED} \
+    for seed in 517 1119
+    do
+        python src/train.py \
+            data.train=train_sample_${SAMPLING}_seed$seed \
+            models=${MODEL_NAME} \
+            models.results=5fold-ctr-${MODEL_NAME}-count-${SAMPLING}-seed$seed
 
-    python src/train.py \
-        data.train=train_day_sample_${SAMPLING}_seed${SEED} \
-        models=${MODEL_NAME} \
-        models.results=5fold-ctr-${MODEL_NAME}-${SAMPLING}-day-seed${SEED}
+        python src/predict.py \
+            models=${MODEL_NAME} \
+            models.results=5fold-ctr-${MODEL_NAME}-count-${SAMPLING}-seed$seed \
+            output.name=5fold-ctr-${MODEL_NAME}-count-${SAMPLING}-seed$seed
+    done
 
-    python src/predict.py \
-        models=${MODEL_NAME} \
-        models.results=5fold-ctr-${MODEL_NAME}-${SAMPLING}-day-seed${SEED} \
-        output.name=5fold-ctr-${MODEL_NAME}-${SAMPLING}-day-seed${SEED}
    ```
 
 ## Summary
@@ -85,12 +82,13 @@ Considering the characteristics of tabular data, we devised a strategy to train 
 
 #### GBDT
 + LightGBM
-    + With hash feature
+    + With count features
     + StratifiedKfold: 5
 
 + CatBoost
     + Use GPU
     + Not used cat_features parameter
+    + With count features
     + StratifiedKFold: 5
 
 #### Deep CTR
@@ -98,7 +96,11 @@ Considering the characteristics of tabular data, we devised a strategy to train 
     + With Gauss Rank
     + StratifiedKFold: 5  
 
-+ DeepFM
++ xDeepFM
+    + With Gauss Rank
+    + StratifiedKFold: 5
+
++ FiBiNET
     + With Gauss Rank
     + StratifiedKFold: 5
 
@@ -118,11 +120,13 @@ $$\hat{y}=f(\frac{1}{n}\sum_i^n f^{-1}(x_i))=f(\mathbb{E}[f^{-1}(X)])$$
 
 |Model|cv|public-lb|private-lb|
 |-----|--|---------|----------|
-|lightgbm-0.45|**0.7833**|**0.7853**|-|
+|lightgbm-0.45|**0.7849**|**0.7863**|-|
 |catboost-0.45|0.7755|0.7766|-|
 |wide&deep-0.45|0.7812|0.7840|-|
 |DeepFM-0.45|0.7791|0.7801|-|
 |xDeepFM-0.45|0.7819|0.7801|-|
+|AutoInt-0.45|0.7801|-|-|
+|FiBiNET-0.45|0.7819|-|-|
 
 + Ensemble result
 
