@@ -2,7 +2,6 @@ from pathlib import Path
 
 import joblib
 import pandas as pd
-import torch
 from category_encoders import CountEncoder
 from omegaconf import DictConfig
 from sklearn.preprocessing import QuantileTransformer
@@ -142,15 +141,3 @@ class DataStorage:
         test_x = test.drop(columns=self.cfg.generator.drop_features)
 
         return test_x
-
-    def load_train_dataloader(self, X_train: pd.DataFrame, y_train: pd.DataFrame) -> tuple[torch.Tensor]:
-        # Convert to tensor
-        X_train_sparse = torch.tensor(X_train[self.cfg.generator.sparse_features].values, dtype=torch.long).to(
-            self.cfg.models.device
-        )
-        X_train_dense = torch.tensor(X_train[self.cfg.generator.dense_features].values, dtype=torch.float).to(
-            self.cfg.models.device
-        )
-        y_train = torch.tensor(y_train.values, dtype=torch.float).unsqueeze(1).to(self.cfg.models.device)
-
-        return X_train_sparse, X_train_dense, y_train
