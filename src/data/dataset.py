@@ -104,7 +104,7 @@ class DataStorage:
 
         feature_engineering = FeatureEngineering(self.cfg)
 
-        if self.cfg.models.name in ["lightgbm", "xgboost"]:
+        if self.cfg.models.name in ["lightgbm", "catboost"]:
             train = self._categorize_train_features(train)
             train = feature_engineering.convert_categorical_features(train)
             train = self._count_train_features(train)
@@ -126,7 +126,7 @@ class DataStorage:
 
         feature_engineering = FeatureEngineering(self.cfg)
 
-        if self.cfg.models.name in ["lightgbm", "xgboost"]:
+        if self.cfg.models.name in ["lightgbm", "catboost"]:
             test = self._categorize_test_features(test)
             test = feature_engineering.convert_categorical_features(test)
             test = self._count_test_features(test)

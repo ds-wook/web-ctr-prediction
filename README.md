@@ -69,8 +69,10 @@ Negative sampling is very important in recommendation systems. This method is ve
 
 ## Features
 #### Label Encoder
+![kaggler](https://github.com/jeongyoonlee/Kaggler)
 
 #### Count features
+I encoded the frequency of occurrence of each categorical dataset and trained them.
 
 #### Gauss Rank
 ![gauss rank](https://github.com/ds-wook/web-ctr-prediction/assets/46340424/4d9ce6bc-8d6c-41f4-b001-298bb4538265)

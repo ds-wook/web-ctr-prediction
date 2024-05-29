@@ -8,39 +8,12 @@ class FeatureEngineering:
     def __init__(self, cfg: DictConfig):
         self.cfg = cfg
 
-    def add_hash_features(self, df: pd.DataFrame) -> pd.DataFrame:
-        # Adding to each value the name of its column and applying a hash function
-        with tqdm(total=len(self.cfg.generator.cat_features), desc="Hashing features") as pbar:
-            for col in self.cfg.generator.cat_features:
-                df[col] = df[col].fillna("NaN")
-                df[col] = df[col].astype(str)
-                df.loc[:, col] = df.loc[:, col].apply(lambda x: hash(x) % 10**6)
-                pbar.update(1)
-
-        return df
-
     def convert_categorical_features(self, df: pd.DataFrame) -> pd.DataFrame:
         with tqdm(total=len(self.cfg.generator.cat_features), desc="Convert features") as pbar:
             # Convert to category type
             for col in self.cfg.generator.cat_features:
                 df[col] = df[col].astype("category")
                 pbar.update(1)
-
-        return df
-
-    def convert_num_features(self, df: pd.DataFrame) -> pd.DataFrame:
-        with tqdm(total=len(self.cfg.generator.cat_features), desc="Convert features") as pbar:
-            # Convert to category type
-            for col in self.cfg.generator.num_features:
-                df[col] = np.log1p(df[col])
-                pbar.update(1)
-
-        return df
-
-    def combine_features(self, df: pd.DataFrame) -> pd.DataFrame:
-        df["F14_18"] = df["F14"] * df["F18"]
-        df["F18_36"] = df["F18"] * df["F36"]
-        df["F27_29"] = df["F27"] * df["F29"]
 
         return df
 
