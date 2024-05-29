@@ -6,10 +6,10 @@ do
     python src/train.py \
         data.train=train_sample_${SAMPLING}_seed$seed \
         models=${MODEL_NAME} \
-        models.results=5fold-ctr-${MODEL_NAME}-count-${SAMPLING}-seed$seed
+        models.results=5fold-ctr-${MODEL_NAME}-${SAMPLING}-seed$seed
 
     python src/predict.py \
         models=${MODEL_NAME} \
-        models.results=5fold-ctr-${MODEL_NAME}-count-${SAMPLING}-seed$seed \
-        output.name=5fold-ctr-${MODEL_NAME}-count-${SAMPLING}-seed$seed
+        models.results=5fold-ctr-${MODEL_NAME}-${SAMPLING}-seed$seed \
+        output.name=5fold-ctr-${MODEL_NAME}-${SAMPLING}-seed$seed
 done

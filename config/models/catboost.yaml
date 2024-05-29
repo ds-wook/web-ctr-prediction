@@ -8,7 +8,7 @@ params:
   simple_ctr: FeatureFreq
   combinations_ctr: FeatureFreq
   max_ctr_complexity: 4
-  learning_rate: 0.05
+  learning_rate: 0.3
   od_type: Iter
   allow_writing_files: False
 
