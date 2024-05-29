@@ -27,7 +27,7 @@ class ModelResult:
 
 
 class BaseModel(ABC):
-    def __init__(self, cfg: DictConfig) -> None:
+    def __init__(self, cfg: DictConfig):
         self.cfg = cfg
 
     @abstractmethod

@@ -10,7 +10,7 @@ from models import BaseModel
 
 
 class WDLTrainer(BaseModel):
-    def __init__(self, cfg: DictConfig) -> None:
+    def __init__(self, cfg: DictConfig):
         super().__init__(cfg)
 
     def _fit(
@@ -71,7 +71,7 @@ class WDLTrainer(BaseModel):
 
 
 class XDeepFMTrainer(BaseModel):
-    def __init__(self, cfg: DictConfig) -> None:
+    def __init__(self, cfg: DictConfig):
         super().__init__(cfg)
 
     def _fit(
@@ -132,7 +132,7 @@ class XDeepFMTrainer(BaseModel):
 
 
 class FiBiNetTranier(BaseModel):
-    def __init__(self, cfg: DictConfig) -> None:
+    def __init__(self, cfg: DictConfig):
         super().__init__(cfg)
 
     def _fit(
@@ -192,7 +192,7 @@ class FiBiNetTranier(BaseModel):
 
 
 class AutoIntTrainer(BaseModel):
-    def __init__(self, cfg: DictConfig) -> None:
+    def __init__(self, cfg: DictConfig):
         super().__init__(cfg)
 
     def _fit(

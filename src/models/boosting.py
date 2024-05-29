@@ -11,7 +11,7 @@ from models import BaseModel
 
 
 class XGBoostTrainer(BaseModel):
-    def __init__(self, cfg: DictConfig) -> None:
+    def __init__(self, cfg: DictConfig):
         super().__init__(cfg)
 
     def _fit(
@@ -40,7 +40,7 @@ class XGBoostTrainer(BaseModel):
 
 
 class CatBoostTrainer(BaseModel):
-    def __init__(self, cfg: DictConfig) -> None:
+    def __init__(self, cfg: DictConfig):
         super().__init__(cfg)
 
     def _fit(
@@ -67,7 +67,7 @@ class CatBoostTrainer(BaseModel):
 
 
 class LightGBMTrainer(BaseModel):
-    def __init__(self, cfg: DictConfig) -> None:
+    def __init__(self, cfg: DictConfig):
         super().__init__(cfg)
 
     def _fit(
