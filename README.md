@@ -66,7 +66,8 @@ Negative sampling is very important in recommendation systems. This method is ve
 
 ## Features
 #### Label Encoder
-![kaggler](https://github.com/jeongyoonlee/Kaggler)
+I encoded the Label of each categorical dataset and trained them together, referring to the [kaggler](https://github.com/jeongyoonlee/Kaggler) code.
+
 
 #### Count features
 I encoded the frequency of occurrence of each categorical dataset and trained them.
