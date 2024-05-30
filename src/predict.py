@@ -40,7 +40,7 @@ def inference_models(cfg: DictConfig, test_x: pd.DataFrame | dict[str, pd.Series
             test_model_input = {
                 name: test_x[name] for name in [*cfg.generator.sparse_features, *cfg.generator.dense_features]
             }
-            preds += model.predict(test_model_input, batch_size=64).flatten() / folds
+            preds += model.predict(test_model_input, batch_size=1024).flatten() / folds
 
         elif isinstance(model, CatBoostClassifier):
             preds += model.predict_proba(test_x)[:, 1] / folds

@@ -12,7 +12,7 @@ import numpy as np
 import pandas as pd
 import xgboost as xgb
 from catboost import CatBoostClassifier
-from deepctr_torch.models import DIFM, WDL, AutoInt, FiBiNET, xDeepFM
+from deepctr_torch.models import WDL, AutoInt, FiBiNET, xDeepFM
 from omegaconf import DictConfig
 from sklearn.metrics import roc_auc_score
 from sklearn.model_selection import StratifiedKFold
@@ -61,11 +61,11 @@ class BaseModel(ABC):
         elif isinstance(model, CatBoostClassifier):
             return model.predict_proba(X)[:, 1]
 
-        elif isinstance(model, DIFM | WDL | xDeepFM | AutoInt | FiBiNET):
+        elif isinstance(model, WDL | xDeepFM | AutoInt | FiBiNET):
             feature_names = [*self.cfg.generator.sparse_features, *self.cfg.generator.dense_features]
             valid_model_input = {name: X[name] for name in feature_names}
 
-            return model.predict(valid_model_input, batch_size=64).flatten()
+            return model.predict(valid_model_input, batch_size=1024).flatten()
 
         elif isinstance(model, lgb.Booster):
             return model.predict(X)
