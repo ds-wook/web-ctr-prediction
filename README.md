@@ -57,7 +57,7 @@ Running the learning code shell.
    ```
 
 ## Summary
-![model summary](https://github.com/ds-wook/web-ctr-prediction/assets/46340424/e0d915dd-fad1-4bc9-959b-90025c15043e)
+![model summary](https://github.com/ds-wook/web-ctr-prediction/assets/46340424/1eb1ad6f-46c2-4580-872b-28354f6520ef)
 
 Simple is better than complex
 
