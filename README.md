@@ -113,9 +113,9 @@ Considering the characteristics of tabular data, we devised a strategy to train 
 ### Ensemble
 #### Sigmoid Ensemble 
 I used the concept of log-odds from logistic regression to construct an ensemble:
-$$𝑓(𝑥)=\frac{1}{1 + e^{-x}}$$
-$$f^{-1}(x)= \log(\frac{x}{1-x})$$
-$$\hat{y}=f(\frac{1}{n}\sum_i^n f^{-1}(x_i))=f(\mathbb{E}[f^{-1}(X)])$$
+$$\sigma(𝑥)=\frac{1}{1 + e^{-x}}$$
+$$\sigma^{-1}(x)= \log(\frac{x}{1-x})$$
+$$\hat{y}=\sigma(\frac{1}{n}\sum_i^n \sigma^{-1}(x_i))=\sigma(\mathbb{E}[\sigma^{-1}(X)])$$
 
 + It seems to perform better than other ensembles (Rank, Voting).
 + Since the prediction values are probabilities, we used the logit function and its inverse to perform bagging for the ensemble.
