@@ -101,9 +101,14 @@ Considering the characteristics of tabular data, we devised a strategy to train 
     + With Gauss Rank
     + StratifiedKFold: 5
 
++ AutoInt
+    + With Gauss Rank
+    + StratifiedKFold: 5
+
 + FiBiNET
     + With Gauss Rank
     + StratifiedKFold: 5
+    + Long training and inferencing time
 
 ### Ensemble
 #### Sigmoid Ensemble 
@@ -121,13 +126,13 @@ $$\hat{y}=f(\frac{1}{n}\sum_i^n f^{-1}(x_i))=f(\mathbb{E}[f^{-1}(X)])$$
 
 |Model|cv|public-lb|private-lb|
 |-----|--|---------|----------|
-|lightgbm-0.45|**0.7849**|**0.7863**|-|
-|catboost-0.45|0.7765|0.7777|-|
-|wide&deep-0.45|0.7812|0.7840|-|
-|DeepFM-0.45|0.7791|0.7801|-|
+|LightGBM-0.45|**0.7849**|**0.7863**|-|
+|FiBiNET-0.45|0.7833|-|-|
 |xDeepFM-0.45|0.7819|-|-|
+|wide&deep-0.45|0.7812|0.7840|-|
 |AutoInt-0.45|0.7801|-|-|
-|FiBiNET-0.45|0.7819|-|-|
+|DeepFM-0.45|0.7791|0.7801|-|
+|CatBoost-0.45|0.7765|0.7777|-|
 
 + Ensemble result
 
@@ -145,6 +150,7 @@ $$\hat{y}=f(\frac{1}{n}\sum_i^n f^{-1}(x_i))=f(\mathbb{E}[f^{-1}(X)])$$
 + Catboost with cat_features parameter
 + XGBoost with GPU
 + Hash features: need more RAM
++ DeepFM
 
 ## Reference
 + [LightGBM: A Highly Efficient Gradient Boosting Decision Tree](https://lightgbm.readthedocs.io/en/stable/)

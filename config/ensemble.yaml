@@ -14,7 +14,7 @@ hydra:
 output:
   path: output
   submission: sample_submission
-  name: sigmoid-ensemble-others-4models
+  name: sigmoid-ensemble-others-6models
 
 preds:
 - 5fold-ctr-lightgbm-0.45-seed517
@@ -25,7 +25,6 @@ preds:
 - 5fold-ctr-wdl-0.45-seed1119
 - 5fold-ctr-xdeepfm-0.45-seed517
 - 5fold-ctr-xdeepfm-0.45-seed1119
-- 5fold-ctr-fibinet-0.45-seed517
-- 5fold-ctr-fibinet-0.45-seed1119
 - 5fold-ctr-autoint-0.45-seed517
 - 5fold-ctr-autoint-0.45-seed1119
+- 5fold-ctr-fibinet-0.45-seed517
