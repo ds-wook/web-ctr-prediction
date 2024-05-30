@@ -9,7 +9,7 @@ import numpy as np
 import pandas as pd
 import xgboost as xgb
 from catboost import CatBoostClassifier
-from deepctr_torch.models import DIFM, WDL, AutoInt, FiBiNET, xDeepFM
+from deepctr_torch.models import WDL, AutoInt, FiBiNET, xDeepFM
 from omegaconf import DictConfig
 from tqdm import tqdm
 
@@ -36,7 +36,7 @@ def inference_models(cfg: DictConfig, test_x: pd.DataFrame | dict[str, pd.Series
         elif isinstance(model, xgb.Booster):
             preds += model.predict(xgb.DMatrix(test_x)) / folds
 
-        elif isinstance(model, DIFM | WDL | xDeepFM | AutoInt | FiBiNET):
+        elif isinstance(model, WDL | xDeepFM | AutoInt | FiBiNET):
             test_model_input = {
                 name: test_x[name] for name in [*cfg.generator.sparse_features, *cfg.generator.dense_features]
             }
