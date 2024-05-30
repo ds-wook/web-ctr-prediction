@@ -3,7 +3,7 @@ export PYTHONHASHSEED=0
 MODEL_NAME="autoint"
 SAMPLING=0.45
 
-for seed in 517
+for seed in 517 1119
 do
     python src/train.py \
         data.train=train_sample_${SAMPLING}_seed$seed \
