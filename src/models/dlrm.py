@@ -50,7 +50,7 @@ class WDLTrainer(BaseModel):
         )
 
         es = EarlyStopping(
-            monitor="val_binary_crossentropy",
+            monitor="val_auc",
             min_delta=0,
             verbose=self.cfg.models.verbose,
             patience=self.cfg.models.patience,
@@ -111,7 +111,7 @@ class XDeepFMTrainer(BaseModel):
         )
 
         es = EarlyStopping(
-            monitor="val_binary_crossentropy",
+            monitor="val_auc",
             min_delta=0,
             verbose=self.cfg.models.verbose,
             patience=self.cfg.models.patience,
@@ -171,7 +171,7 @@ class FiBiNetTranier(BaseModel):
         )
 
         es = EarlyStopping(
-            monitor="val_binary_crossentropy",
+            monitor="val_auc",
             min_delta=0,
             verbose=self.cfg.models.verbose,
             patience=self.cfg.models.patience,
@@ -231,7 +231,7 @@ class AutoIntTrainer(BaseModel):
         )
 
         es = EarlyStopping(
-            monitor="val_binary_crossentropy",
+            monitor="val_auc",
             min_delta=0,
             verbose=self.cfg.models.verbose,
             patience=self.cfg.models.patience,

@@ -9,9 +9,9 @@ lr: 0.0001
 dnn_dropout: 0.5
 verbose: 1
 patience: 2
-mode: min
+mode: max
 batch_size: 4096
-epochs: 3
+epochs: 10
 
 path: res/models/
 results: 5fold-ctr-fibinet-0.4-seed414
