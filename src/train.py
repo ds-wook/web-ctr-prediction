@@ -18,7 +18,7 @@ def _main(cfg: DictConfig):
         # load dataset
         data_storage = DataStorage(cfg)
         train_x, train_y = data_storage.load_train_dataset()
-        print(train_x.shape)
+
         # choose trainer
         trainer = build_model(cfg)
 

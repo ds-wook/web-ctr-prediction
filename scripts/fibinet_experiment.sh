@@ -1,7 +1,7 @@
 MODEL_NAME="fibinet"
-SAMPLING=0.45
+SAMPLING=0.4
 
-for seed in 517 1119
+for seed in 414 602
 do
     python src/train.py \
         data.train=train_sample_${SAMPLING}_seed${seed} \
