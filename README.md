@@ -126,7 +126,7 @@ $$\hat{y}=\sigma(\frac{1}{n}\sum_i^n \sigma^{-1}(x_i))=\sigma(\mathbb{E}[\sigma^
 
 |Model|cv|public-lb|private-lb|
 |-----|--|---------|----------|
-|LightGBM-0.45|**0.7849**|**0.7863**|-|
+|LightGBM-0.45|**0.7850**|**0.7864**|-|
 |FiBiNET-0.45|0.7833|-|-|
 |xDeepFM-0.45|0.7819|-|-|
 |wide&deep-0.45|0.7812|0.7840|-|
@@ -141,7 +141,7 @@ $$\hat{y}=\sigma(\frac{1}{n}\sum_i^n \sigma^{-1}(x_i))=\sigma(\mathbb{E}[\sigma^
 |Rank Ensemble|0.7889|-|
 |Average Ensemble|0.7892|-|
 |Weighted average Ensemble|0.7891|-|
-|Sigmoid Ensemble|**0.7896**|-|
+|Sigmoid Ensemble|**0.7901**|-|
 
 
 ## Doesn't Work

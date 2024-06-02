@@ -65,7 +65,7 @@ class BaseModel(ABC):
             feature_names = [*self.cfg.generator.sparse_features, *self.cfg.generator.dense_features]
             valid_model_input = {name: X[name] for name in feature_names}
 
-            return model.predict(valid_model_input, batch_size=1024).flatten()
+            return model.predict(valid_model_input, batch_size=512).flatten()
 
         elif isinstance(model, lgb.Booster):
             return model.predict(X)
