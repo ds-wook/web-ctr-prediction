@@ -125,9 +125,9 @@ $$\hat{y}=\sigma(\frac{1}{n}\sum_i^n \sigma^{-1}(x_i))=\sigma(\mathbb{E}[\sigma^
 |Model|cv|public-lb|private-lb|
 |-----|--|---------|----------|
 |LightGBM-0.45|**0.7850**|**0.7864**|-|
-|FiBiNET-0.45|0.7833|-|-|
-|xDeepFM-0.45|0.7819|-|-|
+|FiBiNET-0.45|0.7833|0.7860|-|
 |wide&deep-0.45|0.7812|0.7840|-|
+|xDeepFM-0.45|0.7819|-|-|
 |AutoInt-0.45|0.7801|-|-|
 |DeepFM-0.45|0.7791|0.7801|-|
 |CatBoost-0.45|0.7765|0.7777|-|
