@@ -57,12 +57,14 @@ Running the learning code shell.
    ```
 
 ## Summary
-![model summary](https://github.com/ds-wook/web-ctr-prediction/assets/46340424/fd727299-e565-4905-a07a-564ceec5f36b)
+![model summary](https://github.com/ds-wook/web-ctr-prediction/assets/46340424/bf3df76b-bdbe-4097-b3f8-d981cf6f656f)
+
 
 Simple is better than complex
 
 ## Negative Sampling
 Negative sampling is very important in recommendation systems. This method is very effective when it is not possible to train on large volumes of data.
+In my experiment, I used seeds 414 and 602 for a 40% negative sample, and seeds 517 and 1119 for a 45% negative sample.
 
 ## Features
 #### Label Encoder
@@ -98,10 +100,6 @@ Considering the characteristics of tabular data, we devised a strategy to train 
     + StratifiedKFold: 5  
 
 + xDeepFM
-    + With Gauss Rank
-    + StratifiedKFold: 5
-
-+ AutoInt
     + With Gauss Rank
     + StratifiedKFold: 5
 
