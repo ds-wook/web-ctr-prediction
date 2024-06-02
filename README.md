@@ -153,9 +153,9 @@ $$\hat{y}=\sigma(\frac{1}{n}\sum_i^n \sigma^{-1}(x_i))=\sigma(\mathbb{E}[\sigma^
 ## Reference
 + [LightGBM: A Highly Efficient Gradient Boosting Decision Tree](https://lightgbm.readthedocs.io/en/stable/)
 + [Wide & Deep Learning for Recommender Systems](https://arxiv.org/pdf/1606.07792)
-+ [DeepFM: A Factorization-Machine based Neural Network for CTR Prediction](https://arxiv.org/pdf/1703.04247)
++ [FiBiNET: Combining Feature Importance and Bilinear feature Interaction for Click-Through Rate Prediction](https://arxiv.org/pdf/1905.09433)
++ [xDeepFM: Combining Explicit and Implicit Feature Interactions for Recommender Systems](https://arxiv.org/pdf/1803.05170)
 + [CatBoost is a high-performance open source library for gradient boosting on decision trees](https://catboost.ai/)
 + [Efficient Click-Through Rate Prediction for Developing Countries via Tabular Learning](https://arxiv.org/pdf/2104.07553)
 + [Label Encoder](https://github.com/jeongyoonlee/Kaggler/blob/master/kaggler/preprocessing/categorical.py)
-+ [Hash Embeddings for Efficient Word Representations](https://proceedings.neurips.cc/paper/2017/file/f0f6ba4b5e0000340312d33c212c3ae8-Paper.pdf)
 + [Sigmoid Ensemble](https://www.kaggle.com/competitions/amex-default-prediction/discussion/329103)
