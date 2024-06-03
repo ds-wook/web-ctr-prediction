@@ -1,6 +1,6 @@
 # web-ctr-prediction
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)  
-web ctr competition
+[web ctr competition](https://dacon.io/competitions/official/236258/overview/description)
 
 ## Setting
 - CPU: i7-11799K core 8
