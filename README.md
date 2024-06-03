@@ -57,7 +57,7 @@ Running the learning code shell.
    ```
 
 ## Summary
-![model summary](https://github.com/ds-wook/web-ctr-prediction/assets/46340424/cd04c498-b8bb-47f6-a4b6-303b56fb05f2)
+![competition-model](https://github.com/ds-wook/web-ctr-prediction/assets/46340424/21f6f58c-1844-4d6b-a915-3afcacdca4a2)
 
 
 Simple is better than complex
@@ -124,10 +124,10 @@ $$\hat{y}=\sigma(\frac{1}{n}\sum_i^n \sigma^{-1}(x_i))=\sigma(\mathbb{E}[\sigma^
 
 |Model|cv|public-lb|private-lb|
 |-----|--|---------|----------|
-|LightGBM-0.45|**0.7850**|**0.7864**|-|
+|LightGBM-0.45|**0.7850**|0.7864|-|
 |FiBiNET-0.45|0.7833|0.7860|-|
+|xDeepFM-0.45|0.7819|**0.7866**|-|
 |wide&deep-0.45|0.7812|0.7840|-|
-|xDeepFM-0.45|0.7819|-|-|
 |AutoInt-0.45|0.7801|-|-|
 |DeepFM-0.45|0.7791|0.7801|-|
 |CatBoost-0.45|0.7765|0.7777|-|
@@ -139,7 +139,7 @@ $$\hat{y}=\sigma(\frac{1}{n}\sum_i^n \sigma^{-1}(x_i))=\sigma(\mathbb{E}[\sigma^
 |Rank Ensemble|0.7889|-|
 |Average Ensemble|0.7892|-|
 |Weighted average Ensemble|0.7891|-|
-|Sigmoid Ensemble|**0.7901**|-|
+|Sigmoid Ensemble|**0.7903**|-|
 
 
 ## Doesn't Work
