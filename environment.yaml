@@ -27,6 +27,7 @@ dependencies:
     - prettytable==3.8.0
     - pyarrow==16.0.0
     - pytorch-tabnet==4.1.0
+    - pytorch_optimizer==2.12.0
     - scikit-learn==1.2.2
     - scipy==1.10.1
     - torch==1.13.0
@@ -34,5 +35,3 @@ dependencies:
     - torchvision==0.14.0
     - tqdm==4.65.0
     - xgboost==2.0.1
-    - wandb==0.15.12
-    - optuna==2.10.1
