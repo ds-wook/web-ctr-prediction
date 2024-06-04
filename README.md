@@ -97,9 +97,6 @@ Considering the characteristics of tabular data, we devised a strategy to train 
     + StratifiedKFold: 5
 
 #### Deep CTR
-+ Wide & Deep
-    + With Gauss Rank
-    + StratifiedKFold: 5  
 
 + xDeepFM
     + With Gauss Rank
