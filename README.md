@@ -148,7 +148,8 @@ $$\hat{y}=\sigma(\frac{1}{n}\sum_i^n \sigma^{-1}(x_i))=\sigma(\mathbb{E}[\sigma^
 + XGBoost with GPU
 + Hash features: need more RAM
 + DeepFM
-
++ LightGBM DART
+  
 ## Reference
 + [LightGBM: A Highly Efficient Gradient Boosting Decision Tree](https://lightgbm.readthedocs.io/en/stable/)
 + [Wide & Deep Learning for Recommender Systems](https://arxiv.org/pdf/1606.07792)
