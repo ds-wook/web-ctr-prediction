@@ -1,4 +1,4 @@
-for sampling in 0.5
+for sampling in 0.4 0.45
 do
     for seed in 517 1119
     do
