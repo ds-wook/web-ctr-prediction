@@ -162,5 +162,7 @@ input/*
 !input/.gitkeep
 output/*
 !output/.gitkeep
-res/*
-!res/.gitkeep
+res/meta/*
+res/models/*
+!res/meta/.gitkeep
+!res/models/.gitkeep
