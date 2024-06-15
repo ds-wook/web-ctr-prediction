@@ -127,9 +127,8 @@ $$\hat{y}=\sigma(\frac{1}{n}\sum_i^n \sigma^{-1}(x_i))=\sigma(\mathbb{E}[\sigma^
 |FiBiNET-0.45 sampling|0.7833|0.7861|0.7862|
 |xDeepFM-0.45 sampling|0.7819|**0.7866**|**0.7867**|
 |wide&deep-0.45 sampling|0.7812|0.7840|-|
-|AutoInt-0.45 sampling|0.7801|-|-|
-|DeepFM-0.45 sampling|0.7791|0.7801|-|
-|CatBoost-0.45 sampling|0.7765|0.7777|-|
+|AutoInt-0.45 sampling|0.7813|0.7846|0.7848|
+|CatBoost-0.45 sampling|0.7765|0.7773|0.7778|
 
 + Ensemble result
 
