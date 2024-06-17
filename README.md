@@ -1,7 +1,7 @@
 # web-ctr-prediction
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)  
 
-This repository is the 2nd solution of [web ctr competition](https://dacon.io/competitions/official/236258/overview/description).
+This repository is the 1st solution of [web ctr competition](https://dacon.io/competitions/official/236258/overview/description).
 
 
 ## Setting
@@ -126,7 +126,7 @@ $$\hat{y}=\sigma(\frac{1}{n}\sum_i^n \sigma^{-1}(x_i))=\sigma(\mathbb{E}[\sigma^
 |LightGBM-0.45 sampling|**0.7850**|0.7863|0.7866|
 |FiBiNET-0.45 sampling|0.7833|0.7861|0.7862|
 |xDeepFM-0.45 sampling|0.7819|**0.7866**|**0.7867**|
-|wide&deep-0.45 sampling|0.7812|0.7840|-|
+|wide&deep-0.45 sampling|0.7807|0.7835|0.7837|
 |AutoInt-0.45 sampling|0.7813|0.7846|0.7848|
 |CatBoost-0.45 sampling|0.7765|0.7773|0.7778|
 
