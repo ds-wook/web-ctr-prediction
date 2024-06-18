@@ -1,5 +1,5 @@
 MODEL_NAME="wdl"
-SAMPLING=0.4
+SAMPLING=0.45
 
 for seed in 517 1119
 do

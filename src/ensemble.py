@@ -6,7 +6,34 @@ import hydra
 import numpy as np
 import pandas as pd
 from omegaconf import DictConfig
+from scipy.stats import rankdata
 from tqdm import tqdm
+
+
+def ensemble_predictions(predictions, weights, type_="linear"):
+    assert np.isclose(np.sum(weights), 1.0)
+    if type_ == "linear":
+        res = np.average(predictions, weights=weights, axis=0)
+
+    elif type_ == "harmonic":
+        res = np.average([1 / p for p in predictions], weights=weights, axis=0)
+        return 1 / res
+
+    elif type_ == "geometric":
+        numerator = np.average([np.log(p) for p in predictions], weights=weights, axis=0)
+        res = np.exp(numerator / sum(weights))
+        return res
+
+    elif type_ == "rank":
+        res = np.average([rankdata(p) for p in predictions], weights=weights, axis=0)
+        return res / (len(res) + 1)
+
+    elif type_ == "sigmoid":
+        logit_values = np.log(predictions / (1 - predictions))
+        result = np.average(logit_values, weights=weights, axis=0)
+        return 1 / (1 + np.exp(-result))
+
+    return res
 
 
 def calculate_sigmoid_preds(values: list[np.ndarray]) -> np.ndarray:

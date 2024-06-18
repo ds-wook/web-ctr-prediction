@@ -12,6 +12,11 @@ patience: 2
 mode: min
 batch_size: 4096
 epochs: 5
+gpus:
+- 0
+- 1
+- 2
+- 3
 
 path: res/models/
 results: 5fold-ctr-wdl-0.4-seed42
