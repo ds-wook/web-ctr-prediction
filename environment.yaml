@@ -35,3 +35,4 @@ dependencies:
     - torchvision==0.18.1
     - tqdm==4.65.0
     - xgboost==2.0.1
+    - wandb==0.17.2

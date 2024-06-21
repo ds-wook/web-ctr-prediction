@@ -12,11 +12,6 @@ patience: 2
 mode: max
 batch_size: 4096
 epochs: 3
-gpus:
-- 0
-- 1
-- 2
-- 3
 
 path: res/models/
 results: 5fold-ctr-fibinet-0.4-seed414

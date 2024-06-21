@@ -10,13 +10,13 @@ import joblib
 import lightgbm as lgb
 import numpy as np
 import pandas as pd
+import wandb
 import xgboost as xgb
 from catboost import CatBoostClassifier
 from deepctr_torch.models import WDL, AutoInt, FiBiNET, xDeepFM
 from omegaconf import DictConfig
 from sklearn.metrics import roc_auc_score
 from sklearn.model_selection import StratifiedKFold
-from tqdm import tqdm
 from typing_extensions import Self
 
 
@@ -78,8 +78,8 @@ class BaseModel(ABC):
         models = {}
         kfold = StratifiedKFold(n_splits=self.cfg.data.n_splits, shuffle=True, random_state=self.cfg.data.seed)
 
-        with tqdm(kfold.split(X=X, y=y), total=self.cfg.data.n_splits, desc="CV", colour="green") as pbar:
-            for fold, (train_idx, valid_idx) in enumerate(iterable=pbar, start=1):
+        for fold, (train_idx, valid_idx) in enumerate(iterable=kfold.split(X, y), start=1):
+            with wandb.init(project="competition", name=f"{self.cfg.models.name}-fold-{fold}", dir="never"):
                 X_train, X_valid = X.iloc[train_idx], X.iloc[valid_idx]
                 y_train, y_valid = y.iloc[train_idx], y.iloc[valid_idx]
 
@@ -88,8 +88,8 @@ class BaseModel(ABC):
 
                 models[f"fold_{fold}"] = model
 
-            del model, X_train, X_valid, y_train, y_valid
-            gc.collect()
+        del model, X_train, X_valid, y_train, y_valid
+        gc.collect()
 
         self.result = ModelResult(oof_preds=oof_preds, models=models)
 

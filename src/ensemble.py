@@ -10,28 +10,31 @@ from scipy.stats import rankdata
 from tqdm import tqdm
 
 
-def ensemble_predictions(predictions, weights, type_="linear"):
+def ensemble_predictions(predictions: list[np.ndarray], weights: list[float], method: str = "linear") -> np.ndarray:
     assert np.isclose(np.sum(weights), 1.0)
-    if type_ == "linear":
+    if method == "linear":
         res = np.average(predictions, weights=weights, axis=0)
 
-    elif type_ == "harmonic":
+    elif method == "harmonic":
         res = np.average([1 / p for p in predictions], weights=weights, axis=0)
         return 1 / res
 
-    elif type_ == "geometric":
+    elif method == "geometric":
         numerator = np.average([np.log(p) for p in predictions], weights=weights, axis=0)
         res = np.exp(numerator / sum(weights))
         return res
 
-    elif type_ == "rank":
+    elif method == "rank":
         res = np.average([rankdata(p) for p in predictions], weights=weights, axis=0)
         return res / (len(res) + 1)
 
-    elif type_ == "sigmoid":
+    elif method == "sigmoid":
         logit_values = np.log(predictions / (1 - predictions))
         result = np.average(logit_values, weights=weights, axis=0)
         return 1 / (1 + np.exp(-result))
+
+    else:
+        raise ValueError(f"Unknown ensemble method: {method}")
 
     return res
 
