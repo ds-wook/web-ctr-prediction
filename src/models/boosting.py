@@ -3,7 +3,7 @@ from __future__ import annotations
 import lightgbm as lgb
 import numpy as np
 import pandas as pd
-import wandb.integration.catboost as wandb_catboost
+import wandb.integration.catboost as wandb_cb
 import wandb.integration.lightgbm as wandb_lgb
 import xgboost as xgb
 from catboost import CatBoostClassifier, Pool
@@ -63,8 +63,10 @@ class CatBoostTrainer(BaseModel):
             eval_set=valid_set,
             verbose_eval=self.cfg.models.verbose_eval,
             early_stopping_rounds=self.cfg.models.early_stopping_rounds,
-            callbacks=[wandb_catboost.WandbCallback()],
+            callbacks=[wandb_cb.WandbCallback()],
         )
+
+        wandb_cb.log_summary(model)
 
         return model
 
@@ -98,8 +100,6 @@ class LightGBMTrainer(BaseModel):
                 wandb_lgb.wandb_callback(),
             ],
         )
-
-        del train_set, valid_set
 
         wandb_lgb.log_summary(model)
 
