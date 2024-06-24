@@ -5,6 +5,7 @@ import numpy as np
 import pandas as pd
 import wandb.integration.catboost as wandb_cb
 import wandb.integration.lightgbm as wandb_lgb
+import wandb.integration.xgboost as wandb_xgb
 import xgboost as xgb
 from catboost import CatBoostClassifier, Pool
 from omegaconf import DictConfig, OmegaConf
@@ -36,6 +37,7 @@ class XGBoostTrainer(BaseModel):
             num_boost_round=self.cfg.models.num_boost_round,
             early_stopping_rounds=self.cfg.models.early_stopping_rounds,
             verbose_eval=self.cfg.models.verbose_eval,
+            callbacks=[wandb_xgb.WandbCallback()],
         )
 
         return model
