@@ -13,7 +13,7 @@ from deepctr_torch.models import WDL, AutoInt, FiBiNET, xDeepFM
 from omegaconf import DictConfig
 from tqdm import tqdm
 
-from data import DataStorage
+from libs.data import DataStorage
 
 
 def inference_models(cfg: DictConfig, test_x: pd.DataFrame | dict[str, pd.Series]) -> np.ndarray:

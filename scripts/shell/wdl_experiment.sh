@@ -1,16 +1,14 @@
-export PYTHONHASHSEED=0
-
-MODEL_NAME="xdeepfm"
+MODEL_NAME="wdl"
 SAMPLING=0.45
 
 for seed in 517 1119
 do
-    python src/train.py \
+    python -m scripts.train \
         data.train=train_sample_${SAMPLING}_seed${seed} \
         models=${MODEL_NAME} \
         models.results=5fold-ctr-${MODEL_NAME}-${SAMPLING}-seed${seed}
 
-    python src/predict.py \
+    python  -m scripts.predict \
         models=${MODEL_NAME} \
         models.results=5fold-ctr-${MODEL_NAME}-${SAMPLING}-seed${seed} \
         output.name=5fold-ctr-${MODEL_NAME}-${SAMPLING}-seed${seed}

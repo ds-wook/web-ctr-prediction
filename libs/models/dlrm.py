@@ -1,6 +1,5 @@
 import numpy as np
 import pandas as pd
-import torch
 from deepctr_torch.callbacks import EarlyStopping
 from deepctr_torch.inputs import DenseFeat, SparseFeat, get_feature_names
 from deepctr_torch.models import WDL, AutoInt, FiBiNET, xDeepFM

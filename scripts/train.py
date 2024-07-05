@@ -6,8 +6,8 @@ from pathlib import Path
 import hydra
 from omegaconf import DictConfig
 
-from data import DataStorage
-from models import build_model
+from libs.data import DataStorage
+from libs.models import build_model
 
 
 @hydra.main(config_path="../config/", config_name="train", version_base="1.2.0")
