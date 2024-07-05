@@ -28,13 +28,13 @@ Code execution for the new model is as follows:
 Running the learning code shell.
 
    ```sh
-   $ python scripts/covert_to_parquet.py
-   $ sh scripts/sampling_dataset.sh
-   $ sh scripts/lgb_experiment.sh
-   $ sh scripts/cb_experiment.sh
-   $ sh scripts/fibinet_experiment.sh
-   $ sh scripts/xdeepfm_experiment.sh
-   $ python src/ensemble.py
+   $ python scripts/shell/covert_to_parquet.py
+   $ sh scripts/shell/sampling_dataset.sh
+   $ sh scripts/shell/lgb_experiment.sh
+   $ sh scripts/shell/cb_experiment.sh
+   $ sh scripts/shell/fibinet_experiment.sh
+   $ sh scripts/shell/xdeepfm_experiment.sh
+   $ python scripts/ensemble.py
    ```
 
    Examples are as follows.
@@ -45,17 +45,16 @@ Running the learning code shell.
 
     for seed in 517 1119
     do
-        python src/train.py \
-            data.train=train_sample_${SAMPLING}_seed$seed \
+        python -m scripts.train \
+            data.train=train_sample_${SAMPLING}_seed${seed} \
             models=${MODEL_NAME} \
-            models.results=5fold-ctr-${MODEL_NAME}-count-${SAMPLING}-seed$seed
+            models.results=5fold-ctr-${MODEL_NAME}-${SAMPLING}-seed${seed}
 
-        python src/predict.py \
+        python -m scripts.predict \
             models=${MODEL_NAME} \
-            models.results=5fold-ctr-${MODEL_NAME}-count-${SAMPLING}-seed$seed \
-            output.name=5fold-ctr-${MODEL_NAME}-count-${SAMPLING}-seed$seed
+            models.results=5fold-ctr-${MODEL_NAME}-${SAMPLING}-seed${seed} \
+            output.name=5fold-ctr-${MODEL_NAME}-${SAMPLING}-seed${seed}
     done
-
    ```
 
 ## Summary
