@@ -6,7 +6,7 @@ from category_encoders import CountEncoder
 from omegaconf import DictConfig
 from sklearn.preprocessing import QuantileTransformer
 
-from generator import FeatureEngineering, LabelEncoder
+from libs.generator import FeatureEngineering, LabelEncoder
 
 
 class DataStorage:

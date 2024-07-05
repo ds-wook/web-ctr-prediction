@@ -6,7 +6,7 @@ from deepctr_torch.models import WDL, AutoInt, FiBiNET, xDeepFM
 from omegaconf import DictConfig
 from pytorch_optimizer import MADGRAD
 
-from models import BaseModel
+from libs.models import BaseModel
 
 
 class WDLTrainer(BaseModel):

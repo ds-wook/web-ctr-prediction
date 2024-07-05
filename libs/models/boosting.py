@@ -10,7 +10,7 @@ import xgboost as xgb
 from catboost import CatBoostClassifier, Pool
 from omegaconf import DictConfig, OmegaConf
 
-from models import BaseModel
+from libs.models import BaseModel
 
 
 class XGBoostTrainer(BaseModel):
