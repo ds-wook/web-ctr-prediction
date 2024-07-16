@@ -108,7 +108,7 @@ Considering the characteristics of tabular data, we devised a strategy to train 
 
 ### Ensemble
 #### Sigmoid Ensemble 
-I used the concept of log-odds from logistic regression to construct an ensemble:
+I used the concept of log-odds from logistic regression to construct an ensemble:  
 $$\sigma(𝑥)=\frac{1}{1 + e^{-x}}$$  
 $$\sigma^{-1}(x)= \log(\frac{x}{1-x})$$  
 $$\hat{y}=\sigma(\frac{1}{n}\sum_i^n \sigma^{-1}(x_i))=\sigma(\mathbb{E}[\sigma^{-1}(X)])$$  
